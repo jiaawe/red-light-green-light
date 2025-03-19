@@ -27,7 +27,7 @@ All scenarios follow a standardized JSON format with the following key component
   "destination": "string",
   "vehicle_type": "string",
   "estimated_arrival_time": "ISO timestamp",
-  "emergency_vehicle": true/false
+  "emergency_vehicle": true / false
 }
 ```
 
