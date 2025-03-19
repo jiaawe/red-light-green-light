@@ -153,6 +153,6 @@
       "last_changed": "2025-03-19T08:44:30",
       "weather_adjusted_timing": true,
       "extended_yellow_duration_sec": 1.5,
-      "timestamp": "2025-03-19T08:45:00"
+      "next_timestamp": "2025-03-19T08:45:00"
     }
   }
