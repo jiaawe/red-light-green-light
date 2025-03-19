@@ -1,0 +1,160 @@
+{
+    "vehicle_data": [
+      {
+        "vehicle_id": "V4001",
+        "lane_id": "Eastbound_Straight",
+        "speed_kmh": 65.8,
+        "distance_to_intersection_m": 420.5,
+        "destination": "Westbound",
+        "vehicle_type": "ambulance",
+        "estimated_arrival_time": "2025-03-19T12:15:25",
+        "emergency_vehicle": true,
+        "emergency_status": {
+          "lights_active": true,
+          "siren_active": true,
+          "priority_level": "high",
+          "destination_hospital": "Memorial Hospital",
+          "estimated_arrival_hospital": "2025-03-19T12:22:10"
+        }
+      },
+      {
+        "vehicle_id": "V4002",
+        "lane_id": "Eastbound_Straight",
+        "speed_kmh": 25.3,
+        "distance_to_intersection_m": 45.8,
+        "destination": "Westbound",
+        "vehicle_type": "car",
+        "estimated_arrival_time": "2025-03-19T12:15:12",
+        "emergency_vehicle": false
+      },
+      {
+        "vehicle_id": "V4003",
+        "lane_id": "Eastbound_Straight",
+        "speed_kmh": 22.7,
+        "distance_to_intersection_m": 85.2,
+        "destination": "Westbound",
+        "vehicle_type": "suv",
+        "estimated_arrival_time": "2025-03-19T12:15:22",
+        "emergency_vehicle": false
+      },
+      {
+        "vehicle_id": "V4004",
+        "lane_id": "Southbound_Left",
+        "speed_kmh": 18.4,
+        "distance_to_intersection_m": 25.6,
+        "destination": "Eastbound",
+        "vehicle_type": "sedan",
+        "estimated_arrival_time": "2025-03-19T12:15:08",
+        "emergency_vehicle": false
+      },
+      {
+        "vehicle_id": "V4005",
+        "lane_id": "Southbound_Straight",
+        "speed_kmh": 32.5,
+        "distance_to_intersection_m": 110.4,
+        "destination": "Northbound",
+        "vehicle_type": "car",
+        "estimated_arrival_time": "2025-03-19T12:15:26",
+        "emergency_vehicle": false
+      },
+      {
+        "vehicle_id": "V4006",
+        "lane_id": "Northbound_Straight",
+        "speed_kmh": 29.7,
+        "distance_to_intersection_m": 95.2,
+        "destination": "Southbound",
+        "vehicle_type": "car",
+        "estimated_arrival_time": "2025-03-19T12:15:24",
+        "emergency_vehicle": false
+      },
+      {
+        "vehicle_id": "V4007",
+        "lane_id": "Westbound_Right",
+        "speed_kmh": 15.6,
+        "distance_to_intersection_m": 35.8,
+        "destination": "Northbound",
+        "vehicle_type": "van",
+        "estimated_arrival_time": "2025-03-19T12:15:17",
+        "emergency_vehicle": false
+      }
+    ],
+    "traffic_metrics": {
+      "congestion_level": "moderate",
+      "historical_comparison": {
+        "typical_congestion_level": "moderate",
+        "percent_difference": 5,
+        "timestamp": "2025-03-19T12:15:00"
+      },
+      "average_throughput_sec": {
+        "Northbound_Straight": 145,
+        "Northbound_Left": 110,
+        "Northbound_Right": 170,
+        "Eastbound_Straight": 150,
+        "Eastbound_Left": 115,
+        "Eastbound_Right": 175,
+        "Southbound_Straight": 140,
+        "Southbound_Left": 105,
+        "Southbound_Right": 165,
+        "Westbound_Straight": 155,
+        "Westbound_Left": 120,
+        "Westbound_Right": 180
+      },
+      "emergency_response_metrics": {
+        "signal_preemption_active": true,
+        "estimated_delay_reduction_sec": 45.8,
+        "average_clearance_time_sec": 12.5,
+        "historical_emergency_transit_time_sec": 68.2
+      }
+    },
+    "pedestrians": {
+      "crosswalk_north": 3,
+      "crosswalk_east": 0,
+      "crosswalk_south": 2,
+      "crosswalk_west": 0,
+      "waiting_for_signal": 8,
+      "timestamp": "2025-03-19T12:15:00"
+    },
+    "historical_patterns": {
+      "predicted_volume_trend": "stable",
+      "seasonal_factors": ["weekday", "midday"]
+    },
+    "context": {
+      "weather": "Clear",
+      "peak_period": false,
+      "incident_reported": true,
+      "incident_details": {
+        "incident_type": "medical_emergency",
+        "reported_at": "2025-03-19T12:08:32",
+        "location_description": "Residential area west of intersection",
+        "priority_level": "high",
+        "response_units": ["ambulance_441", "police_patrol_28"]
+      }
+    },
+    "signal_status": {
+      "Northbound_Straight": "red",
+      "Northbound_Left": "red",
+      "Northbound_Right": "red",
+      "Eastbound_Straight": "green",
+      "Eastbound_Left": "red",
+      "Eastbound_Right": "green",
+      "Southbound_Straight": "red",
+      "Southbound_Left": "red",
+      "Southbound_Right": "red",
+      "Westbound_Straight": "red",
+      "Westbound_Left": "red",
+      "Westbound_Right": "red",
+      "Crosswalk_North": "do_not_walk",
+      "Crosswalk_East": "do_not_walk",
+      "Crosswalk_South": "do_not_walk",
+      "Crosswalk_West": "do_not_walk",
+      "last_changed": "2025-03-19T12:14:45",
+      "emergency_preemption": {
+        "active": true,
+        "triggered_by": "V4001",
+        "preemption_started": "2025-03-19T12:14:45",
+        "estimated_duration_sec": 60,
+        "approach_direction": "Eastbound"
+      },
+      "timestamp": "2025-03-19T12:15:00"
+    }
+  }

@@ -1,0 +1,62 @@
+{
+    "vehicle_data": [],
+    "traffic_metrics": {
+      "congestion_level": "none",
+      "historical_comparison": {
+        "typical_congestion_level": "low",
+        "percent_difference": -100,
+        "timestamp": "2025-03-19T14:30:00"
+      },
+      "average_throughput_sec": {
+        "Northbound_Straight": 0,
+        "Northbound_Left": 0,
+        "Northbound_Right": 0,
+        "Eastbound_Straight": 0,
+        "Eastbound_Left": 0,
+        "Eastbound_Right": 0,
+        "Southbound_Straight": 0,
+        "Southbound_Left": 0,
+        "Southbound_Right": 0,
+        "Westbound_Straight": 0,
+        "Westbound_Left": 0,
+        "Westbound_Right": 0
+      }
+    },
+    "pedestrians": {
+      "crosswalk_north": 0,
+      "crosswalk_east": 0,
+      "crosswalk_south": 0,
+      "crosswalk_west": 0,
+      "waiting_for_signal": 12,
+      "timestamp": "2025-03-19T14:30:00"
+    },
+    "historical_patterns": {
+      "predicted_volume_trend": "stable",
+      "seasonal_factors": ["normal"]
+    },
+    "context": {
+      "weather": "Sunny",
+      "peak_period": false,
+      "incident_reported": false
+    },
+    "signal_status": {
+      "Northbound_Straight": "green",
+      "Northbound_Left": "green",
+      "Northbound_Right": "green",
+      "Eastbound_Straight": "red",
+      "Eastbound_Left": "red",
+      "Eastbound_Right": "red",
+      "Southbound_Straight": "green",
+      "Southbound_Left": "green",
+      "Southbound_Right": "green",
+      "Westbound_Straight": "red",
+      "Westbound_Left": "red",
+      "Westbound_Right": "red",
+      "Crosswalk_North": "do_not_walk",
+      "Crosswalk_East": "do_not_walk",
+      "Crosswalk_South": "do_not_walk",
+      "Crosswalk_West": "do_not_walk",
+      "last_changed": "2025-03-19T14:29:00",
+      "timestamp": "2025-03-19T14:30:00"
+    }
+  }

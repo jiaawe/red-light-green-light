@@ -1,0 +1,158 @@
+{
+    "vehicle_data": [
+      {
+        "vehicle_id": "V3001",
+        "lane_id": "Northbound_Straight",
+        "speed_kmh": 22.5,
+        "distance_to_intersection_m": 95.2,
+        "destination": "Southbound",
+        "vehicle_type": "car",
+        "estimated_arrival_time": "2025-03-19T08:45:22",
+        "emergency_vehicle": false,
+        "windshield_wiper_active": true,
+        "headlights_active": true
+      },
+      {
+        "vehicle_id": "V3002",
+        "lane_id": "Northbound_Straight",
+        "speed_kmh": 18.9,
+        "distance_to_intersection_m": 130.5,
+        "destination": "Southbound",
+        "vehicle_type": "suv",
+        "estimated_arrival_time": "2025-03-19T08:45:39",
+        "emergency_vehicle": false,
+        "windshield_wiper_active": true,
+        "headlights_active": true
+      },
+      {
+        "vehicle_id": "V3003",
+        "lane_id": "Eastbound_Left",
+        "speed_kmh": 15.6,
+        "distance_to_intersection_m": 75.8,
+        "destination": "Northbound",
+        "vehicle_type": "sedan",
+        "estimated_arrival_time": "2025-03-19T08:45:31",
+        "emergency_vehicle": false,
+        "windshield_wiper_active": true,
+        "headlights_active": true
+      },
+      {
+        "vehicle_id": "V3004",
+        "lane_id": "Westbound_Straight",
+        "speed_kmh": 20.2,
+        "distance_to_intersection_m": 85.3,
+        "destination": "Eastbound",
+        "vehicle_type": "truck",
+        "estimated_arrival_time": "2025-03-19T08:45:27",
+        "emergency_vehicle": false,
+        "windshield_wiper_active": true,
+        "headlights_active": true
+      }
+    ],
+    "traffic_metrics": {
+      "congestion_level": "moderate",
+      "historical_comparison": {
+        "typical_congestion_level": "low",
+        "percent_difference": 45,
+        "timestamp": "2025-03-19T08:45:00",
+        "weather_impact_factor": 0.65
+      },
+      "average_throughput_sec": {
+        "Northbound_Straight": 140,
+        "Northbound_Left": 100,
+        "Northbound_Right": 165,
+        "Eastbound_Straight": 145,
+        "Eastbound_Left": 95,
+        "Eastbound_Right": 170,
+        "Southbound_Straight": 135,
+        "Southbound_Left": 90,
+        "Southbound_Right": 160,
+        "Westbound_Straight": 130,
+        "Westbound_Left": 85,
+        "Westbound_Right": 155
+      },
+      "weather_adjusted_metrics": {
+        "speed_reduction_factor": 0.7,
+        "throughput_reduction_factor": 0.75
+      }
+    },
+    "pedestrians": {
+      "crosswalk_north": 1,
+      "crosswalk_east": 1,
+      "crosswalk_south": 1,
+      "crosswalk_west": 1,
+      "waiting_for_signal": 4,
+      "timestamp": "2025-03-19T08:45:00",
+      "carrying_umbrellas": 6
+    },
+    "historical_patterns": {
+      "predicted_volume_trend": "lower_than_normal",
+      "seasonal_factors": ["school_day", "rainy_day"],
+      "similar_weather_patterns": [
+        {
+          "date": "2025-03-05",
+          "weather": "Heavy Rain",
+          "traffic_volume_reduction": 22,
+          "average_speed_reduction_kmh": 15.2
+        },
+        {
+          "date": "2025-02-18",
+          "weather": "Moderate Rain",
+          "traffic_volume_reduction": 18,
+          "average_speed_reduction_kmh": 12.5
+        }
+      ],
+      "school_day_impact": {
+        "morning_peak_shift_minutes": -15,
+        "afternoon_peak_shift_minutes": 10,
+        "volume_increase_percent": 12
+      }
+    },
+    "context": {
+      "weather": {
+        "condition": "Heavy Rain",
+        "temperature_celsius": 8.5,
+        "wind_speed_kmh": 22,
+        "precipitation_mm_per_hour": 12.5,
+        "visibility_meters": 800,
+        "road_condition": "wet",
+        "forecast": {
+          "duration_minutes": 120,
+          "changing_to": "Light Rain",
+          "expected_change_time": "2025-03-19T10:30:00"
+        }
+      },
+      "peak_period": true,
+      "incident_reported": false,
+      "weather_alerts": [
+        {
+          "type": "Flash Flood Warning",
+          "severity": "moderate",
+          "issued_at": "2025-03-19T07:30:00",
+          "expires_at": "2025-03-19T13:30:00"
+        }
+      ]
+    },
+    "signal_status": {
+      "Northbound_Straight": "green",
+      "Northbound_Left": "red",
+      "Northbound_Right": "green",
+      "Eastbound_Straight": "red",
+      "Eastbound_Left": "red",
+      "Eastbound_Right": "red",
+      "Southbound_Straight": "green",
+      "Southbound_Left": "red",
+      "Southbound_Right": "green",
+      "Westbound_Straight": "red",
+      "Westbound_Left": "red",
+      "Westbound_Right": "red",
+      "Crosswalk_North": "do_not_walk",
+      "Crosswalk_East": "walk",
+      "Crosswalk_South": "do_not_walk",
+      "Crosswalk_West": "walk",
+      "last_changed": "2025-03-19T08:44:30",
+      "weather_adjusted_timing": true,
+      "extended_yellow_duration_sec": 1.5,
+      "timestamp": "2025-03-19T08:45:00"
+    }
+  }
