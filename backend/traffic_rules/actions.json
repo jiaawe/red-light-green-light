@@ -2,7 +2,7 @@
     "traffic_states": [
       {
         "id": "ns_straight_priority",
-        "description": "North-South straight and left with pedestrian crossing (E-W)",
+        "description": "North-South straight and left with pedestrian crossing (N-S)",
         "signal_status": {
           "Northbound_Straight": "green",
           "Northbound_Left": "green",
@@ -16,15 +16,13 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "walk"
+          "Crosswalk_North_South": "walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
         "id": "ew_straight_priority",
-        "description": "East-West straight and left with pedestrian crossing (N-S)",
+        "description": "East-West straight and left with pedestrian crossing (E-W)",
         "signal_status": {
           "Northbound_Straight": "red",
           "Northbound_Left": "red",
@@ -38,10 +36,8 @@
           "Westbound_Straight": "green",
           "Westbound_Left": "green",
           "Westbound_Right": "red",
-          "Crosswalk_North": "walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "walk"
         }
       },
       {
@@ -60,10 +56,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -82,10 +76,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "green_arrow",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -104,10 +96,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -126,10 +116,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -148,10 +136,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -170,10 +156,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "green_arrow",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -192,10 +176,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -214,10 +196,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "green_arrow",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -236,10 +216,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -258,10 +236,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -280,10 +256,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -302,10 +276,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "green_arrow",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -324,10 +296,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "red",
-          "Crosswalk_North": "walk",
-          "Crosswalk_East": "walk",
-          "Crosswalk_South": "walk",
-          "Crosswalk_West": "walk"
+          "Crosswalk_North_South": "walk",
+          "Crosswalk_East_West": "walk"
         }
       },
       {
@@ -346,10 +316,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -368,10 +336,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -390,10 +356,8 @@
           "Westbound_Straight": "red",
           "Westbound_Left": "red",
           "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       },
       {
@@ -412,10 +376,8 @@
           "Westbound_Straight": "green",
           "Westbound_Left": "green_arrow",
           "Westbound_Right": "green_arrow",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
+          "Crosswalk_North_South": "do_not_walk",
+          "Crosswalk_East_West": "do_not_walk"
         }
       }
     ]
