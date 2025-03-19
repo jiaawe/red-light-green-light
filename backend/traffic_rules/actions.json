@@ -23,50 +23,6 @@
         }
       },
       {
-        "id": "ns_straight_right_discretionary",
-        "description": "North-South straight with discretionary right turns (yield)",
-        "signal_status": {
-          "Northbound_Straight": "green",
-          "Northbound_Left": "red",
-          "Northbound_Right": "green",
-          "Southbound_Straight": "green",
-          "Southbound_Left": "red",
-          "Southbound_Right": "green",
-          "Eastbound_Straight": "red",
-          "Eastbound_Left": "red",
-          "Eastbound_Right": "red",
-          "Westbound_Straight": "red",
-          "Westbound_Left": "red",
-          "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
-        }
-      },
-      {
-        "id": "ns_protected_right",
-        "description": "North-South protected right turns only",
-        "signal_status": {
-          "Northbound_Straight": "red",
-          "Northbound_Left": "red",
-          "Northbound_Right": "green_arrow",
-          "Southbound_Straight": "red",
-          "Southbound_Left": "red",
-          "Southbound_Right": "green_arrow",
-          "Eastbound_Straight": "red",
-          "Eastbound_Left": "red",
-          "Eastbound_Right": "red",
-          "Westbound_Straight": "red",
-          "Westbound_Left": "red",
-          "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
-        }
-      },
-      {
         "id": "ew_straight_priority",
         "description": "East-West straight and left with pedestrian crossing (N-S)",
         "signal_status": {
@@ -89,21 +45,21 @@
         }
       },
       {
-        "id": "ew_straight_right_discretionary",
-        "description": "East-West straight with discretionary right turns (yield)",
+        "id": "ns_protected_right",
+        "description": "North-South protected right turns only",
         "signal_status": {
           "Northbound_Straight": "red",
           "Northbound_Left": "red",
-          "Northbound_Right": "red",
+          "Northbound_Right": "green_arrow",
           "Southbound_Straight": "red",
           "Southbound_Left": "red",
-          "Southbound_Right": "red",
-          "Eastbound_Straight": "green",
+          "Southbound_Right": "green_arrow",
+          "Eastbound_Straight": "red",
           "Eastbound_Left": "red",
-          "Eastbound_Right": "green",
-          "Westbound_Straight": "green",
+          "Eastbound_Right": "red",
+          "Westbound_Straight": "red",
           "Westbound_Left": "red",
-          "Westbound_Right": "green",
+          "Westbound_Right": "red",
           "Crosswalk_North": "do_not_walk",
           "Crosswalk_East": "do_not_walk",
           "Crosswalk_South": "do_not_walk",
@@ -265,6 +221,94 @@
         }
       },
       {
+        "id": "n_protected_left",
+        "description": "Northbound protected left turn only",
+        "signal_status": {
+          "Northbound_Straight": "red",
+          "Northbound_Left": "green_arrow",
+          "Northbound_Right": "red",
+          "Southbound_Straight": "red",
+          "Southbound_Left": "red",
+          "Southbound_Right": "red",
+          "Eastbound_Straight": "red",
+          "Eastbound_Left": "red",
+          "Eastbound_Right": "red",
+          "Westbound_Straight": "red",
+          "Westbound_Left": "red",
+          "Westbound_Right": "red",
+          "Crosswalk_North": "do_not_walk",
+          "Crosswalk_East": "do_not_walk",
+          "Crosswalk_South": "do_not_walk",
+          "Crosswalk_West": "do_not_walk"
+        }
+      },
+      {
+        "id": "s_protected_left",
+        "description": "Southbound protected left turn only",
+        "signal_status": {
+          "Northbound_Straight": "red",
+          "Northbound_Left": "red",
+          "Northbound_Right": "red",
+          "Southbound_Straight": "red",
+          "Southbound_Left": "green_arrow",
+          "Southbound_Right": "red",
+          "Eastbound_Straight": "red",
+          "Eastbound_Left": "red",
+          "Eastbound_Right": "red",
+          "Westbound_Straight": "red",
+          "Westbound_Left": "red",
+          "Westbound_Right": "red",
+          "Crosswalk_North": "do_not_walk",
+          "Crosswalk_East": "do_not_walk",
+          "Crosswalk_South": "do_not_walk",
+          "Crosswalk_West": "do_not_walk"
+        }
+      },
+      {
+        "id": "e_protected_left",
+        "description": "Eastbound protected left turn only",
+        "signal_status": {
+          "Northbound_Straight": "red",
+          "Northbound_Left": "red",
+          "Northbound_Right": "red",
+          "Southbound_Straight": "red",
+          "Southbound_Left": "red",
+          "Southbound_Right": "red",
+          "Eastbound_Straight": "red",
+          "Eastbound_Left": "green_arrow",
+          "Eastbound_Right": "red",
+          "Westbound_Straight": "red",
+          "Westbound_Left": "red",
+          "Westbound_Right": "red",
+          "Crosswalk_North": "do_not_walk",
+          "Crosswalk_East": "do_not_walk",
+          "Crosswalk_South": "do_not_walk",
+          "Crosswalk_West": "do_not_walk"
+        }
+      },
+      {
+        "id": "w_protected_left",
+        "description": "Westbound protected left turn only",
+        "signal_status": {
+          "Northbound_Straight": "red",
+          "Northbound_Left": "red",
+          "Northbound_Right": "red",
+          "Southbound_Straight": "red",
+          "Southbound_Left": "red",
+          "Southbound_Right": "red",
+          "Eastbound_Straight": "red",
+          "Eastbound_Left": "red",
+          "Eastbound_Right": "red",
+          "Westbound_Straight": "red",
+          "Westbound_Left": "green_arrow",
+          "Westbound_Right": "red",
+          "Crosswalk_North": "do_not_walk",
+          "Crosswalk_East": "do_not_walk",
+          "Crosswalk_South": "do_not_walk",
+          "Crosswalk_West": "do_not_walk"
+        }
+      },
+      {
         "id": "all_pedestrians",
         "description": "All-pedestrian phase (all vehicles stop)",
         "signal_status": {
@@ -284,50 +328,6 @@
           "Crosswalk_East": "walk",
           "Crosswalk_South": "walk",
           "Crosswalk_West": "walk"
-        }
-      },
-      {
-        "id": "emergency_ns",
-        "description": "Emergency vehicle priority North-South",
-        "signal_status": {
-          "Northbound_Straight": "green",
-          "Northbound_Left": "green",
-          "Northbound_Right": "green",
-          "Southbound_Straight": "green",
-          "Southbound_Left": "green",
-          "Southbound_Right": "green",
-          "Eastbound_Straight": "red",
-          "Eastbound_Left": "red",
-          "Eastbound_Right": "red",
-          "Westbound_Straight": "red",
-          "Westbound_Left": "red",
-          "Westbound_Right": "red",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
-        }
-      },
-      {
-        "id": "emergency_ew",
-        "description": "Emergency vehicle priority East-West",
-        "signal_status": {
-          "Northbound_Straight": "red",
-          "Northbound_Left": "red",
-          "Northbound_Right": "red",
-          "Southbound_Straight": "red",
-          "Southbound_Left": "red",
-          "Southbound_Right": "red",
-          "Eastbound_Straight": "green",
-          "Eastbound_Left": "green",
-          "Eastbound_Right": "green",
-          "Westbound_Straight": "green",
-          "Westbound_Left": "green",
-          "Westbound_Right": "green",
-          "Crosswalk_North": "do_not_walk",
-          "Crosswalk_East": "do_not_walk",
-          "Crosswalk_South": "do_not_walk",
-          "Crosswalk_West": "do_not_walk"
         }
       },
       {
