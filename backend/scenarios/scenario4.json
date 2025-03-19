@@ -77,10 +77,8 @@
       }
     },
     "pedestrians": {
-      "crosswalk_north": 1,
-      "crosswalk_east": 1,
-      "crosswalk_south": 1,
-      "crosswalk_west": 1,
+      "crosswalk_north_south": 1,
+      "crosswalk_east_west": 1,
       "waiting_for_signal": 4,
       "timestamp": "2025-03-19T08:45:00",
       "carrying_umbrellas": 6
@@ -146,10 +144,8 @@
       "Westbound_Straight": "red",
       "Westbound_Left": "red",
       "Westbound_Right": "red",
-      "Crosswalk_North": "do_not_walk",
-      "Crosswalk_East": "walk",
-      "Crosswalk_South": "do_not_walk",
-      "Crosswalk_West": "walk",
+      "Crosswalk_North_South": "do_not_walk",
+      "Crosswalk_East_West": "walk",
       "last_changed": "2025-03-19T08:44:30",
       "weather_adjusted_timing": true,
       "extended_yellow_duration_sec": 1.5,
