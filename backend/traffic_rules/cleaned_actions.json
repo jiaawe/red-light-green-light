@@ -1,0 +1,195 @@
+{
+    "traffic_rules": [
+      {
+        "id": "ns_straight_priority",
+        "required_status": {
+          "Northbound_Straight": "green",
+          "Northbound_Left": "green",
+          "Northbound_Right": "red",
+          "Southbound_Straight": "green",
+          "Southbound_Left": "green",
+          "Southbound_Right": "red",
+          "Eastbound_Straight": "red",
+          "Eastbound_Left": "red",
+          "Eastbound_Right": "red",
+          "Westbound_Straight": "red",
+          "Westbound_Left": "red",
+          "Westbound_Right": "red",
+          "Crosswalk_North_South": "green",
+          "Crosswalk_East_West": "red"
+        }
+      },
+      {
+        "id": "ew_straight_priority",
+        "required_status": {
+          "Northbound_Straight": "red",
+          "Northbound_Left": "red",
+          "Northbound_Right": "red",
+          "Southbound_Straight": "red",
+          "Southbound_Left": "red",
+          "Southbound_Right": "red",
+          "Eastbound_Straight": "green",
+          "Eastbound_Left": "green",
+          "Eastbound_Right": "red",
+          "Westbound_Straight": "green",
+          "Westbound_Left": "green",
+          "Westbound_Right": "red",
+          "Crosswalk_North_South": "red",
+          "Crosswalk_East_West": "green"
+        }
+      },
+      {
+        "id": "ns_protected_right",
+        "required_status": {
+          "Northbound_Straight": "red",
+          "Northbound_Left": "red",
+          "Northbound_Right": "green",
+          "Southbound_Straight": "red",
+          "Southbound_Left": "red",
+          "Southbound_Right": "green",
+          "Eastbound_Straight": "red",
+          "Eastbound_Left": "red",
+          "Eastbound_Right": "red",
+          "Westbound_Straight": "red",
+          "Westbound_Left": "red",
+          "Westbound_Right": "red",
+          "Crosswalk_North_South": "red",
+          "Crosswalk_East_West": "red"
+        }
+      },
+      {
+        "id": "ew_protected_right",
+        "required_status": {
+          "Northbound_Straight": "red",
+          "Northbound_Left": "red",
+          "Northbound_Right": "red",
+          "Southbound_Straight": "red",
+          "Southbound_Left": "red",
+          "Southbound_Right": "red",
+          "Eastbound_Straight": "red",
+          "Eastbound_Left": "red",
+          "Eastbound_Right": "green",
+          "Westbound_Straight": "red",
+          "Westbound_Left": "red",
+          "Westbound_Right": "green",
+          "Crosswalk_North_South": "red",
+          "Crosswalk_East_West": "red"
+        }
+      },
+      {
+        "id": "ns_protected_left",
+        "required_status": {
+          "Northbound_Straight": "red",
+          "Northbound_Left": "green",
+          "Northbound_Right": "red",
+          "Southbound_Straight": "red",
+          "Southbound_Left": "green",
+          "Southbound_Right": "red",
+          "Eastbound_Straight": "red",
+          "Eastbound_Left": "red",
+          "Eastbound_Right": "red",
+          "Westbound_Straight": "red",
+          "Westbound_Left": "red",
+          "Westbound_Right": "red",
+          "Crosswalk_North_South": "red",
+          "Crosswalk_East_West": "red"
+        }
+      },
+      {
+        "id": "ew_protected_left",
+        "required_status": {
+          "Northbound_Straight": "red",
+          "Northbound_Left": "red",
+          "Northbound_Right": "red",
+          "Southbound_Straight": "red",
+          "Southbound_Left": "red",
+          "Southbound_Right": "red",
+          "Eastbound_Straight": "red",
+          "Eastbound_Left": "green",
+          "Eastbound_Right": "red",
+          "Westbound_Straight": "red",
+          "Westbound_Left": "green",
+          "Westbound_Right": "red",
+          "Crosswalk_North_South": "red",
+          "Crosswalk_East_West": "red"
+        }
+      },
+      {
+        "id": "split_phase_north",
+        "required_status": {
+          "Northbound_Straight": "green",
+          "Northbound_Left": "green",
+          "Northbound_Right": "green",
+          "Southbound_Straight": "red",
+          "Southbound_Left": "red",
+          "Southbound_Right": "red",
+          "Eastbound_Straight": "red",
+          "Eastbound_Left": "red",
+          "Eastbound_Right": "red",
+          "Westbound_Straight": "red",
+          "Westbound_Left": "red",
+          "Westbound_Right": "red",
+          "Crosswalk_North_South": "red",
+          "Crosswalk_East_West": "red"
+        }
+      },
+      {
+        "id": "split_phase_south",
+        "required_status": {
+          "Northbound_Straight": "red",
+          "Northbound_Left": "red",
+          "Northbound_Right": "red",
+          "Southbound_Straight": "green",
+          "Southbound_Left": "green",
+          "Southbound_Right": "green",
+          "Eastbound_Straight": "red",
+          "Eastbound_Left": "red",
+          "Eastbound_Right": "red",
+          "Westbound_Straight": "red",
+          "Westbound_Left": "red",
+          "Westbound_Right": "red",
+          "Crosswalk_North_South": "red",
+          "Crosswalk_East_West": "red"
+        }
+      },
+      {
+        "id": "split_phase_east",
+        "required_status": {
+          "Eastbound_Straight": "green",
+          "Eastbound_Left": "green",
+          "Eastbound_Right": "green",
+          "Northbound_Straight": "red",
+          "Northbound_Left": "red",
+          "Northbound_Right": "red",
+          "Southbound_Straight": "red",
+          "Southbound_Left": "red",
+          "Southbound_Right": "red",
+          "Westbound_Straight": "red",
+          "Westbound_Left": "red",
+          "Westbound_Right": "red",
+          "Crosswalk_North_South": "red",
+          "Crosswalk_East_West": "red"
+        }
+      },
+      {
+        "id": "split_phase_west",
+        "required_status": {
+          "Westbound_Straight": "green",
+          "Westbound_Left": "green",
+          "Westbound_Right": "green",
+          "Northbound_Straight": "red",
+          "Northbound_Left": "red",
+          "Northbound_Right": "red",
+          "Southbound_Straight": "red",
+          "Southbound_Left": "red",
+          "Southbound_Right": "red",
+          "Eastbound_Straight": "red",
+          "Eastbound_Left": "red",
+          "Eastbound_Right": "red",
+          "Crosswalk_North_South": "red",
+          "Crosswalk_East_West": "red"
+        }
+      }
+    ]
+  }
+  
