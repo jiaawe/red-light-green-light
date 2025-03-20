@@ -1,0 +1,80 @@
+{
+  "traffic_signals": {
+    "ns_straight_priority": {
+      "Northbound_Straight": "green",
+      "Northbound_Left": "green",
+      "Northbound_Right": "red",
+      "Southbound_Straight": "green",
+      "Southbound_Left": "green",
+      "Southbound_Right": "red",
+      "Eastbound_Straight": "red",
+      "Eastbound_Left": "red",
+      "Eastbound_Right": "red",
+      "Westbound_Straight": "red",
+      "Westbound_Left": "red",
+      "Westbound_Right": "red",
+      "Crosswalk_North_South": "green",
+      "Crosswalk_East_West": "red"
+    },
+    "ew_straight_priority": {
+      "Northbound_Straight": "red",
+      "Northbound_Left": "red",
+      "Northbound_Right": "red",
+      "Southbound_Straight": "red",
+      "Southbound_Left": "red",
+      "Southbound_Right": "red",
+      "Eastbound_Straight": "green",
+      "Eastbound_Left": "green",
+      "Eastbound_Right": "red",
+      "Westbound_Straight": "green",
+      "Westbound_Left": "green",
+      "Westbound_Right": "red",
+      "Crosswalk_North_South": "red",
+      "Crosswalk_East_West": "green"
+    },
+    "ns_protected_right": {
+      "Northbound_Straight": "red",
+      "Northbound_Left": "red",
+      "Northbound_Right": "green",
+      "Southbound_Straight": "red",
+      "Southbound_Left": "red",
+      "Southbound_Right": "green",
+      "Eastbound_Straight": "red",
+      "Eastbound_Left": "red",
+      "Eastbound_Right": "red",
+      "Westbound_Straight": "red",
+      "Westbound_Left": "red",
+      "Westbound_Right": "red",
+      "Crosswalk_North_South": "red",
+      "Crosswalk_East_West": "red"
+    },
+    "ew_protected_right": {
+      "Northbound_Straight": "red",
+      "Northbound_Left": "red",
+      "Northbound_Right": "red",
+      "Southbound_Straight": "red",
+      "Southbound_Left": "red",
+      "Southbound_Right": "red",
+      "Eastbound_Straight": "red",
+      "Eastbound_Left": "red",
+      "Eastbound_Right": "green",
+      "Westbound_Straight": "red",
+      "Westbound_Left": "red",
+      "Westbound_Right": "green",
+      "Crosswalk_North_South": "red",
+      "Crosswalk_East_West": "red"
+    }
+  },
+  "movements_description": [
+    {"id": "ns_straight_priority", "movement": "Vehicles move straight and turn left from North and South directions."},
+    {"id": "ew_straight_priority", "movement": "Vehicles move straight and turn left from East and West directions."},
+    {"id": "ns_protected_right", "movement": "Vehicles perform protected right turns from North and South directions only."},
+    {"id": "ew_protected_right", "movement": "Vehicles perform protected right turns from East and West directions only."},
+    {"id": "ns_protected_left", "movement": "Vehicles perform protected left turns from North and South directions only."},
+    {"id": "ew_protected_left", "movement": "Vehicles perform protected left turns from East and West directions only."},
+    {"id": "split_phase_north", "movement": "Vehicles from Northbound direction perform all movements (straight, left, and right) exclusively."},
+    {"id": "split_phase_south", "movement": "Vehicles from Southbound direction perform all movements (straight, left, and right) exclusively."},
+    {"id": "split_phase_east", "movement": "Vehicles from Eastbound direction perform all movements (straight, left, and right) exclusively."},
+    {"id": "split_phase_west", "movement": "Vehicles from Westbound direction perform all movements (straight, left, and right) exclusively."}
+  ]
+}

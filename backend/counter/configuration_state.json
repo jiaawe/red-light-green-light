@@ -1,0 +1,42 @@
+{
+  "ns_straight_priority": {
+    "vehicles": 0,
+    "pedestrians": 0
+  },
+  "ew_straight_priority": {
+    "vehicles": 0,
+    "pedestrians": 0
+  },
+  "ns_protected_right": {
+    "vehicles": 0,
+    "pedestrians": 0
+  },
+  "ew_protected_right": {
+    "vehicles": 0,
+    "pedestrians": 0
+  },
+  "ns_protected_left": {
+    "vehicles": 0,
+    "pedestrians": 0
+  },
+  "ew_protected_left": {
+    "vehicles": 0,
+    "pedestrians": 0
+  },
+  "split_phase_north": {
+    "vehicles": 0,
+    "pedestrians": 0
+  },
+  "split_phase_south": {
+    "vehicles": 0,
+    "pedestrians": 0
+  },
+  "split_phase_east": {
+    "vehicles": 0,
+    "pedestrians": 0
+  },
+  "split_phase_west": {
+    "vehicles": 0,
+    "pedestrians": 0
+  }
+}

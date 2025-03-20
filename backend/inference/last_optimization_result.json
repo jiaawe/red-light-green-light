@@ -1,0 +1,12 @@
+{
+  "selected_configuration": "ns_straight_priority",
+  "duration_seconds": 60,
+  "justification": "The configuration 'ns_straight_priority' was selected because it allows for the highest throughput for vehicles moving straight and turning left from the North and South directions, which is crucial for maintaining traffic flow. Given that all current vehicle and pedestrian counts are zero, this configuration was chosen based on fairness considerations, as it has not been used recently. The duration of 60 seconds was determined to be appropriate as it is a moderate time that allows for potential traffic buildup while ensuring that the intersection does not remain idle for too long. This duration is also in line with the optimization parameters that suggest shorter durations when traffic counts are low. Since there are no significant pedestrian counts, the focus remains on vehicle throughput, and this configuration will help maintain a balanced flow across the intersection.",
+  "updated_memory": [
+    {
+      "configuration": "ns_straight_priority",
+      "duration": 60,
+      "timestamp": "2025-03-20T22:41:13.101836"
+    }
+  ]
+}

@@ -1,10 +1,7 @@
-{
-    "traffic_memory_queue": [
-      { "id": "ns_straight_priority", "allocated_time": 30 },
-      { "id": "ew_straight_priority", "allocated_time": 25 },
-      { "id": "ns_protected_right", "allocated_time": 10 },
-      { "id": "ew_protected_right", "allocated_time": 10 },
-      { "id": "split_phase_north", "allocated_time": 15 },
-      { "id": "split_phase_south", "allocated_time": 15 }
-    ]
+[
+  {
+    "configuration": "ns_straight_priority",
+    "duration": 60,
+    "timestamp": "2025-03-20T22:41:13.101836"
   }
+]

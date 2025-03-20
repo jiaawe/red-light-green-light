@@ -1,16 +1,16 @@
 import json
 from collections import defaultdict
 
-VEHICLE_COUNTER_PATH = "backend/counter/vehicle_count.json" 
-PEDESTRAIN_COUNTER_PATH = "backend/counter/pedestrain_count.json"
-TRAFFIC_RULES_PATH = "backend/traffic_rules/cleaned_actions.json"
-AGGREGATED_DATA_PATH = "backend/counter/aggregated.json"
+VEHICLE_COUNTER_PATH = "backend/counter/vehicle_state.json" 
+PEDESTRAIN_COUNTER_PATH = "backend/counter/pedestrain_state.json"
+TRAFFIC_RULES_PATH = "backend/traffic_rules/traffic_configuration.json"
+AGGREGATED_DATA_PATH = "backend/counter/configuration_state.json"
 
 def calculate_and_save_traffic_counts(
         vehicle_intent_path, 
         pedestrian_intent_path, 
         traffic_rules_path,
-        output_file="output.json"
+        output_file
     ):
     """
     Calculate the total number of vehicles and pedestrians for each traffic action
@@ -45,11 +45,11 @@ def calculate_and_save_traffic_counts(
                 traffic_action_counts[action_id]["pedestrians"] += pedestrian_intent[crosswalk]
     
     print(traffic_action_counts)
-    # with open(output_path, 'w') as file:
-    #     json.dump(traffic_action_counts, file)
+    with open(output_file, 'w') as file:
+        json.dump(traffic_action_counts, file, indent=2)
 
     # Return the saved file path
-    # return output_path
+    return output_file
 
 # Example usage
 calculate_and_save_traffic_counts(VEHICLE_COUNTER_PATH, PEDESTRAIN_COUNTER_PATH, TRAFFIC_RULES_PATH, AGGREGATED_DATA_PATH)
