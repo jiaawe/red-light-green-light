@@ -1,7 +1,12 @@
 [
   {
+    "configuration": "ew_straight_priority",
+    "duration": 120,
+    "timestamp": "2025-03-20T22:52:44.224969"
+  },
+  {
     "configuration": "ns_straight_priority",
-    "duration": 60,
-    "timestamp": "2025-03-20T22:41:13.101836"
+    "duration": 120,
+    "timestamp": "2025-03-20T22:52:07.015772"
   }
 ]
