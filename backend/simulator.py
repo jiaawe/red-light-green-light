@@ -29,6 +29,10 @@ class TrafficSimulator:
         self.vehicles = copy.deepcopy(self.scenario["vehicle_data"])
         self.pedestrians = copy.deepcopy(self.scenario["pedestrians"])
         
+        # Get weather and context data if available
+        self.weather = self.scenario.get("context", {}).get("weather", None)
+        self.context = self.scenario.get("context", None)
+        
         # Track vehicle and pedestrian statistics
         self.vehicle_stats = {}
         self.passed_vehicles = []
@@ -51,7 +55,7 @@ class TrafficSimulator:
     def _get_strategy(self):
         """Get the traffic signal strategy implementation"""
         if self.strategy_name == "set_interval":
-            return SetIntervalStrategy()
+            return SetIntervalStrategy(config_path="traffic_rules/traffic_configuration.json")
         else:
             raise ValueError(f"Unknown strategy: {self.strategy_name}")
             
@@ -175,22 +179,30 @@ class TrafficSimulator:
         self.current_signal_status = self.strategy.get_next_signal_status(
             self.current_signal_status,
             self.vehicles,
-            self.pedestrians
+            self.pedestrians,
+            self.weather,
+            self.context
         )
         
         # Update timestamps
         self.timestamp = self.signal_change_timestamp
         self.current_signal_status["last_changed"] = self.timestamp.isoformat()
         
-        # Set next timestamp (30 seconds later by default)
-        self.next_timestamp = self.timestamp + timedelta(seconds=30)
+        # Get duration from signal status or use default of 60 seconds
+        duration_seconds = self.current_signal_status.get("duration_seconds", 60)
+        
+        # Set next timestamp based on duration
+        self.next_timestamp = self.timestamp + timedelta(seconds=duration_seconds)
         self.signal_change_timestamp = self.next_timestamp
         self.current_signal_status["next_timestamp"] = self.next_timestamp.isoformat()
         
         if self.debug:
             print(f"Signal changed at {self.timestamp.isoformat()}")
             print(f"North/South: {'green' if self.current_signal_status.get('Northbound_Straight') == 'green' else 'red'}")
+            print(f"North/South Crosswalk: {'walk' if self.current_signal_status.get('Crosswalk_North_South') == 'walk' else 'stop'}")
             print(f"East/West: {'green' if self.current_signal_status.get('Eastbound_Straight') == 'green' else 'red'}")
+            print(f"East/West Crosswalk: {'walk' if self.current_signal_status.get('Crosswalk_East_West') == 'walk' else 'stop'}")
+            print(f"Duration: {duration_seconds} seconds")
         
     def _is_simulation_complete(self) -> bool:
         """Check if simulation is complete (no vehicles or pedestrians)"""
@@ -199,7 +211,7 @@ class TrafficSimulator:
             sum(self.pedestrians.get(k, 0) for k in ["crosswalk_north_south", "crosswalk_east_west", "waiting_for_signal"]) == 0
         )
                 
-    def run(self, max_steps: int = 1000):
+    def run(self, max_steps: int = 10000):
         """Run the simulation for a maximum number of steps"""
         step = 0
         delta_time = 5  # 5 seconds per step
@@ -226,8 +238,8 @@ class TrafficSimulator:
                 print(f"Step {step}: {len(self.vehicles)} vehicles, " +
                       f"{sum(self.pedestrians.get(k, 0) for k in ['crosswalk_north_south', 'crosswalk_east_west', 'waiting_for_signal'])} pedestrians")
                 
-            # Safety check - break if no changes in last 20 steps (vehicles might be stuck)
-            if step > 20 and len(self.vehicles) > 0:
+            # Safety check - break if no changes in last x steps (vehicles might be stuck)
+            if step > 1000 and len(self.vehicles) > 0:
                 if len(set(self.queue_lengths[-20:])) == 1:
                     if self.debug:
                         print("Warning: Possible deadlock detected. Breaking simulation.")

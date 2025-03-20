@@ -42,9 +42,9 @@ def calculate_metrics(states: List[Dict[str, Any]],
     
     # Calculate throughput
     vehicle_count = len(passed_vehicles)
-    metrics["throughput_per_hour"]["vehicles"] = vehicle_count / duration_hours
-    metrics["throughput_per_hour"]["pedestrians"] = passed_pedestrians / duration_hours
-    metrics["throughput_per_hour"]["total"] = (vehicle_count + passed_pedestrians) / duration_hours
+    metrics["throughput_per_hour"]["vehicles"] = round(vehicle_count / duration_hours)
+    metrics["throughput_per_hour"]["pedestrians"] = round(passed_pedestrians / duration_hours)
+    metrics["throughput_per_hour"]["total"] = round((vehicle_count + passed_pedestrians) / duration_hours)
     
     # Calculate delay and stops
     if passed_vehicles:

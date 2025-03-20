@@ -143,7 +143,6 @@
     "pedestrians": {
       "crosswalk_north_south": 6,
       "crosswalk_east_west": 5,
-      "waiting_for_signal": 20,
       "timestamp": "2025-03-19T17:30:00"
     },
     "historical_patterns": {

@@ -24,12 +24,20 @@ class SetIntervalStrategy:
     def get_next_signal_status(self, 
                               current_signal: Dict[str, Any], 
                               vehicles: List[Dict[str, Any]], 
-                              pedestrians: Dict[str, Any]) -> Dict[str, Any]:
+                              pedestrians: Dict[str, Any],
+                              weather: Dict[str, Any] = None,
+                              context: Dict[str, Any] = None) -> Dict[str, Any]:
         
         # Simply cycle to the next configuration
         self.current_index = (self.current_index + 1) % len(self.configurations)
         next_config = self.configurations[self.current_index]
         
+        # Determine the duration based on the configuration type
+        if "protected_right" in next_config or "protected_left" in next_config:
+            duration_seconds = 20  # 20 seconds for turning only
+        else:
+            duration_seconds = 60  # 60 seconds for all others
+            
         # Get the signal configuration
         next_signal = dict(self.traffic_signals[next_config])
         
@@ -37,5 +45,14 @@ class SetIntervalStrategy:
         for key, value in current_signal.items():
             if key not in next_signal and key not in ["last_changed", "next_timestamp"]:
                 next_signal[key] = value
+        
+        # Store the configuration duration for use in simulator
+        next_signal["duration_seconds"] = duration_seconds
+        
+        # Store weather and context data if provided
+        if weather:
+            next_signal["weather_data"] = weather
+        if context:
+            next_signal["context_data"] = context
         
         return next_signal
