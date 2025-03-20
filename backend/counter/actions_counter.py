@@ -25,7 +25,7 @@ def calculate_and_save_traffic_counts(
     with open(pedestrian_intent_path, 'r') as file:
         pedestrian_intent_json = file.read()
 
-    traffic_rules = json.loads(traffic_rules_json)
+    traffic_rules = json.loads(traffic_rules_json)['traffic_rules']
     vehicle_intent = json.loads(vehicle_intent_json)
     pedestrian_intent = json.loads(pedestrian_intent_json)
 

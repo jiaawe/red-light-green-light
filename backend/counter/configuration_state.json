@@ -1,42 +1,42 @@
 {
   "ns_straight_priority": {
-    "vehicles": 0,
+    "vehicles": 90,
     "pedestrians": 0
   },
   "ew_straight_priority": {
-    "vehicles": 0,
+    "vehicles": 103,
     "pedestrians": 0
   },
   "ns_protected_right": {
-    "vehicles": 0,
+    "vehicles": 35,
     "pedestrians": 0
   },
   "ew_protected_right": {
-    "vehicles": 0,
+    "vehicles": 22,
     "pedestrians": 0
   },
   "ns_protected_left": {
-    "vehicles": 0,
+    "vehicles": 40,
     "pedestrians": 0
   },
   "ew_protected_left": {
-    "vehicles": 0,
+    "vehicles": 38,
     "pedestrians": 0
   },
   "split_phase_north": {
-    "vehicles": 0,
+    "vehicles": 80,
     "pedestrians": 0
   },
   "split_phase_south": {
-    "vehicles": 0,
+    "vehicles": 45,
     "pedestrians": 0
   },
   "split_phase_east": {
-    "vehicles": 0,
+    "vehicles": 65,
     "pedestrians": 0
   },
   "split_phase_west": {
-    "vehicles": 0,
+    "vehicles": 60,
     "pedestrians": 0
   }
 }
