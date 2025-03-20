@@ -1,0 +1,14 @@
+{
+    "Northbound_Straight": 50,
+    "Northbound_Left": 30,
+    "Northbound_Right": 20,
+    "Southbound_Straight": 40,
+    "Southbound_Left": 25,
+    "Southbound_Right": 15,
+    "Eastbound_Straight": 35,
+    "Eastbound_Left": 20,
+    "Eastbound_Right": 10,
+    "Westbound_Straight": 30,
+    "Westbound_Left": 18,
+    "Westbound_Right": 12
+}
