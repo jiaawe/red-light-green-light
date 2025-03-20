@@ -1,10 +1,8 @@
 import json
 import os
-import time
 from datetime import datetime, timedelta
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any
 import copy
-import math
 
 # Import strategies and metrics
 from strategy.set_interval import SetIntervalStrategy
@@ -95,28 +93,54 @@ class TrafficSimulator:
                 
             # Calculate new position
             speed_ms = vehicle["speed_kmh"] / 3.6  # Convert km/h to m/s
-            new_distance = vehicle["distance_to_intersection_m"] - speed_ms * delta_time
+            new_distance = max(0, vehicle["distance_to_intersection_m"] - speed_ms * delta_time)
             
             # Check if vehicle can proceed through intersection
             can_proceed = False
             
             if new_distance <= 0:
-                # Check traffic rules based on lane and signal
-                signal_key = lane_id  # Default signal key matches lane_id
+                # Check if estimated arrival time has been reached
+                if "estimated_arrival_time" in vehicle:
+                    estimated_arrival = datetime.fromisoformat(vehicle["estimated_arrival_time"])
+                    if self.timestamp < estimated_arrival:
+                        # Vehicle hasn't reached its estimated arrival time yet
+                        vehicle["distance_to_intersection_m"] = new_distance
+                        updated_vehicles.append(vehicle)
+                        continue
                 
-                if "Right" in lane_id:
-                    # Right turn: Can proceed on green or green_arrow
-                    can_proceed = self.current_signal_status.get(signal_key) in ["green", "green_arrow"]
-                elif "Left" in lane_id:
-                    # Left turn: Can proceed on green or green_arrow
-                    can_proceed = self.current_signal_status.get(signal_key) in ["green", "green_arrow"]
-                else:
-                    # Straight: Can proceed on green
-                    can_proceed = self.current_signal_status.get(signal_key) == "green"
+                # Match lane_id to signal configuration key
+                if lane_id in self.current_signal_status:
+                    can_proceed = self.current_signal_status[lane_id] == "green"
                     
-                # Emergency vehicles can always proceed
-                if vehicle.get("emergency_vehicle", False):
+                    # Special handling for left turns (yield to pedestrians)
+                    if can_proceed and "_Left" in lane_id:
+                        # Determine which crosswalk this left turn crosses
+                        # In Singapore right-hand drive context:
+                        # North/South Left turns cross East/West pedestrians
+                        # East/West Left turns cross North/South pedestrians
+                        relevant_crosswalk = None
+                        relevant_signal = None
+                        
+                        if "Northbound" in lane_id or "Southbound" in lane_id:
+                            relevant_crosswalk = "crosswalk_east_west"
+                            relevant_signal = "Crosswalk_East_West"
+                        elif "Eastbound" in lane_id or "Westbound" in lane_id:
+                            relevant_crosswalk = "crosswalk_north_south"
+                            relevant_signal = "Crosswalk_North_South"
+                        
+                        # Check if pedestrians are present AND have green signal
+                        if (relevant_crosswalk and relevant_signal and
+                            self.pedestrians.get(relevant_crosswalk, 0) > 0 and
+                            self.current_signal_status.get(relevant_signal) == "green"):
+                            can_proceed = False  # Yield to pedestrians
+                            if self.debug:
+                                print(f"Vehicle {vehicle_id} yielding to pedestrians at {relevant_crosswalk}")
+                
+                # Check for emergency vehicles - they can proceed regardless
+                if vehicle.get("emergency_vehicle", False) and vehicle.get("emergency_status", {}).get("lights_active", False):
                     can_proceed = True
+                    if self.debug:
+                        print(f"Emergency vehicle {vehicle_id} proceeding through intersection")
                 
                 if can_proceed:
                     # Vehicle passes through intersection
@@ -129,7 +153,7 @@ class TrafficSimulator:
                         "stops": self.vehicle_stats[vehicle_id]["stops"]
                     })
                     if self.debug:
-                        print(f"Vehicle {vehicle_id} passed through intersection")
+                        print(f"Vehicle {vehicle_id} passed through intersection via {lane_id}")
                     continue
                 else:
                     # Vehicle stops at intersection
@@ -148,31 +172,24 @@ class TrafficSimulator:
         
     def _update_pedestrians(self, delta_time: int):
         """Update pedestrian counts based on crosswalk signals"""
+        # For Singapore context - right-hand drive with protected right turns
         ns_crosswalk = "crosswalk_north_south"
         ew_crosswalk = "crosswalk_east_west"
         
         # Pedestrians cross when walk signal is active
-        if ns_crosswalk in self.pedestrians and self.current_signal_status.get("Crosswalk_North_South") == "walk":
-            crossing_rate = min(2, self.pedestrians[ns_crosswalk])  # 2 pedestrians per time step
+        if ns_crosswalk in self.pedestrians and self.current_signal_status.get("Crosswalk_North_South") == "green":
+            crossing_rate = min(1, self.pedestrians[ns_crosswalk])  # 1 pedestrian per time step
             self.pedestrians[ns_crosswalk] = max(0, self.pedestrians[ns_crosswalk] - crossing_rate)
             self.passed_pedestrians += crossing_rate
+            if self.debug and crossing_rate > 0:
+                print(f"{crossing_rate} pedestrians crossed N-S")
             
-        if ew_crosswalk in self.pedestrians and self.current_signal_status.get("Crosswalk_East_West") == "walk":
-            crossing_rate = min(2, self.pedestrians[ew_crosswalk])  # 2 pedestrians per time step
+        if ew_crosswalk in self.pedestrians and self.current_signal_status.get("Crosswalk_East_West") == "green":
+            crossing_rate = min(1, self.pedestrians[ew_crosswalk])  # 1 pedestrian per time step
             self.pedestrians[ew_crosswalk] = max(0, self.pedestrians[ew_crosswalk] - crossing_rate)
             self.passed_pedestrians += crossing_rate
-            
-        # Move waiting pedestrians to crosswalks when walk signal activates
-        waiting_to_move = min(1, self.pedestrians.get("waiting_for_signal", 0))
-        
-        if waiting_to_move > 0:
-            # Decide which crosswalk receives the waiting pedestrians
-            if self.current_signal_status.get("Crosswalk_North_South") == "walk":
-                self.pedestrians[ns_crosswalk] = self.pedestrians.get(ns_crosswalk, 0) + waiting_to_move
-                self.pedestrians["waiting_for_signal"] -= waiting_to_move
-            elif self.current_signal_status.get("Crosswalk_East_West") == "walk":
-                self.pedestrians[ew_crosswalk] = self.pedestrians.get(ew_crosswalk, 0) + waiting_to_move
-                self.pedestrians["waiting_for_signal"] -= waiting_to_move
+            if self.debug and crossing_rate > 0:
+                print(f"{crossing_rate} pedestrians crossed E-W")
         
     def _change_signal(self):
         """Change the traffic signal using the strategy"""
@@ -198,23 +215,28 @@ class TrafficSimulator:
         
         if self.debug:
             print(f"Signal changed at {self.timestamp.isoformat()}")
-            print(f"North/South: {'green' if self.current_signal_status.get('Northbound_Straight') == 'green' else 'red'}")
-            print(f"North/South Crosswalk: {'walk' if self.current_signal_status.get('Crosswalk_North_South') == 'walk' else 'stop'}")
-            print(f"East/West: {'green' if self.current_signal_status.get('Eastbound_Straight') == 'green' else 'red'}")
-            print(f"East/West Crosswalk: {'walk' if self.current_signal_status.get('Crosswalk_East_West') == 'walk' else 'stop'}")
             print(f"Duration: {duration_seconds} seconds")
+            # Print which lanes have green lights
+            green_lanes = [lane for lane, status in self.current_signal_status.items() 
+                          if status == "green" and not lane.startswith("Crosswalk")]
+            print(f"Green lanes: {', '.join(green_lanes)}")
         
     def _is_simulation_complete(self) -> bool:
         """Check if simulation is complete (no vehicles or pedestrians)"""
         return (
             len(self.vehicles) == 0 and
-            sum(self.pedestrians.get(k, 0) for k in ["crosswalk_north_south", "crosswalk_east_west", "waiting_for_signal"]) == 0
+            sum(self.pedestrians.get(k, 0) for k in ["crosswalk_north_south", "crosswalk_east_west"]) == 0
         )
                 
     def run(self, max_steps: int = 10000):
         """Run the simulation for a maximum number of steps"""
         step = 0
         delta_time = 5  # 5 seconds per step
+        if self.debug:
+            print(f'Starting simulation with traffic signal configuration:')
+            for lane, status in self.current_signal_status.items():
+                if status == "green":
+                    print(f'  {lane}: {status}')
         
         while step < max_steps and not self._is_simulation_complete():
             step += 1
@@ -224,9 +246,10 @@ class TrafficSimulator:
             if self.timestamp >= self.signal_change_timestamp:
                 self._change_signal()
                 
-            # Update vehicle and pedestrian states
-            self._update_vehicles(delta_time)
+            # Update pedestrian states first, then vehicle states
+            # This ensures pedestrians are cleared before allowing vehicles to turn left
             self._update_pedestrians(delta_time)
+            self._update_vehicles(delta_time)
             
             # Save current state
             self._save_state()
@@ -236,7 +259,7 @@ class TrafficSimulator:
             
             if self.debug and step % 10 == 0:
                 print(f"Step {step}: {len(self.vehicles)} vehicles, " +
-                      f"{sum(self.pedestrians.get(k, 0) for k in ['crosswalk_north_south', 'crosswalk_east_west', 'waiting_for_signal'])} pedestrians")
+                      f"{sum(self.pedestrians.get(k, 0) for k in ['crosswalk_north_south', 'crosswalk_east_west'])} pedestrians")
                 
             # Safety check - break if no changes in last x steps (vehicles might be stuck)
             if step > 1000 and len(self.vehicles) > 0:
@@ -245,6 +268,8 @@ class TrafficSimulator:
                         print("Warning: Possible deadlock detected. Breaking simulation.")
                         for vehicle in self.vehicles:
                             print(f"Stuck vehicle: {vehicle['vehicle_id']} at lane {vehicle['lane_id']}")
+                            print(f"Signal status for lane: {self.current_signal_status.get(vehicle['lane_id'], 'unknown')}")
+                    
                     # Force process all remaining vehicles
                     for vehicle in self.vehicles:
                         self.passed_vehicles.append({
@@ -292,7 +317,7 @@ class TrafficSimulator:
             
 if __name__ == "__main__":
     # Example usage
-    simulator = TrafficSimulator("scenarios/scenario1.json", strategy="set_interval", debug=True)
+    simulator = TrafficSimulator("scenarios/scenario5.json", strategy="set_interval", debug=True)
     experiment_dir, metrics = simulator.run()
     
     print(f"Simulation complete. Results saved to {experiment_dir}")

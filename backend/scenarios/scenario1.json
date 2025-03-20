@@ -2,8 +2,8 @@
     "vehicle_data": [
       {
         "vehicle_id": "V1001",
-        "lane_id": "Northbound_Straight",
-        "speed_kmh": 0,
+        "lane_id": "Southbound_Straight",
+        "speed_kmh": 4,
         "distance_to_intersection_m": 5.2,
         "destination": "Southbound",
         "vehicle_type": "car",
@@ -12,8 +12,8 @@
       },
       {
         "vehicle_id": "V1002",
-        "lane_id": "Northbound_Straight",
-        "speed_kmh": 0,
+        "lane_id": "Southbound_Straight",
+        "speed_kmh": 3,
         "distance_to_intersection_m": 10.5,
         "destination": "Southbound",
         "vehicle_type": "suv",
@@ -22,12 +22,32 @@
       },
       {
         "vehicle_id": "V1003",
-        "lane_id": "Northbound_Left",
-        "speed_kmh": 0,
+        "lane_id": "Southbound_Left",
+        "speed_kmh": 5,
         "distance_to_intersection_m": 6.8,
         "destination": "Westbound",
         "vehicle_type": "sedan",
         "estimated_arrival_time": "2025-03-19T08:00:06",
+        "emergency_vehicle": false
+      },
+      {
+        "vehicle_id": "V1004",
+        "lane_id": "Southbound_Right",
+        "speed_kmh": 2,
+        "distance_to_intersection_m": 12.8,
+        "destination": "Westbound",
+        "vehicle_type": "car",
+        "estimated_arrival_time": "2025-03-19T08:00:09",
+        "emergency_vehicle": false
+      },
+      {
+        "vehicle_id": "V1005",
+        "lane_id": "Southbound_Straight",
+        "speed_kmh": 10,
+        "distance_to_intersection_m": 125.8,
+        "destination": "Westbound",
+        "vehicle_type": "car",
+        "estimated_arrival_time": "2025-03-19T08:01:50",
         "emergency_vehicle": false
       }
     ],

@@ -55,4 +55,5 @@ class SetIntervalStrategy:
         if context:
             next_signal["context_data"] = context
         
+        print(f"Next signal: {next_signal}")
         return next_signal
