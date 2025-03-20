@@ -12,7 +12,7 @@ class SetIntervalStrategy:
         """Initialize with available traffic configurations"""
         self.config_path = config_path
         self.config = self._load_config()
-        self.traffic_signals = self.config.get("traffic_signals", {})
+        self.traffic_signals = self.config.get("traffic_rules", {})
         self.configurations = list(self.traffic_signals.keys())
         self.current_index = -1  # Start at -1 so first call will return index 0
         
