@@ -1,0 +1,17 @@
+{
+  "throughput_per_hour": {
+    "vehicles": 102.85714285714286,
+    "pedestrians": 0.0,
+    "total": 102.85714285714286
+  },
+  "average_delay_per_vehicle": 0.0,
+  "total_stops": 0,
+  "max_queue_length": 3,
+  "average_queue_length": 3.0,
+  "carbon_emissions": {
+    "CO2_kg": 0.129,
+    "NOx_g": 0.0435,
+    "particulates_g": 0.0021
+  },
+  "energy_efficiency": 0.072
+}

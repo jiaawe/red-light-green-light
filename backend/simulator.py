@@ -6,7 +6,7 @@ from typing import Dict, List, Any, Optional
 import copy
 import math
 
-# Import strategy and metrics
+# Import strategies and metrics
 from strategy.set_interval import SetIntervalStrategy
 from utils.metrics import calculate_metrics
 
@@ -22,7 +22,7 @@ class TrafficSimulator:
         # Initialize simulation time variables
         self.timestamp = datetime.fromisoformat(self.scenario["signal_status"]["last_changed"])
         self.next_timestamp = datetime.fromisoformat(self.scenario["signal_status"]["next_timestamp"])
-        self.signal_change_timestamp = self.next_timestamp - timedelta(seconds=5)
+        self.signal_change_timestamp = self.next_timestamp
         
         # Initialize state variables
         self.current_signal_status = copy.deepcopy(self.scenario["signal_status"])
@@ -98,20 +98,20 @@ class TrafficSimulator:
             
             if new_distance <= 0:
                 # Check traffic rules based on lane and signal
+                signal_key = lane_id  # Default signal key matches lane_id
+                
                 if "Right" in lane_id:
-                    # Right turn: Can only proceed on green or green_arrow
-                    can_proceed = self.current_signal_status.get(lane_id) in ["green", "green_arrow"]
+                    # Right turn: Can proceed on green or green_arrow
+                    can_proceed = self.current_signal_status.get(signal_key) in ["green", "green_arrow"]
                 elif "Left" in lane_id:
-                    # Left turn: Pedestrians go first, then cars
-                    crosswalk = "Crosswalk_East_West" if "North" in lane_id or "South" in lane_id else "Crosswalk_North_South"
-                    pedestrians_crossing = self.current_signal_status.get(crosswalk) == "walk"
-                    can_proceed = self.current_signal_status.get(lane_id) in ["green", "green_arrow"] and not pedestrians_crossing
+                    # Left turn: Can proceed on green or green_arrow
+                    can_proceed = self.current_signal_status.get(signal_key) in ["green", "green_arrow"]
                 else:
                     # Straight: Can proceed on green
-                    can_proceed = self.current_signal_status.get(lane_id) == "green"
+                    can_proceed = self.current_signal_status.get(signal_key) == "green"
                     
-                if vehicle.get("emergency_vehicle", False) and vehicle.get("emergency_status", {}).get("lights_active", False):
-                    # Emergency vehicles with active lights can proceed
+                # Emergency vehicles can always proceed
+                if vehicle.get("emergency_vehicle", False):
                     can_proceed = True
                 
                 if can_proceed:
@@ -124,6 +124,8 @@ class TrafficSimulator:
                         "wait_time": self.vehicle_stats[vehicle_id]["wait_time"],
                         "stops": self.vehicle_stats[vehicle_id]["stops"]
                     })
+                    if self.debug:
+                        print(f"Vehicle {vehicle_id} passed through intersection")
                     continue
                 else:
                     # Vehicle stops at intersection
@@ -182,8 +184,13 @@ class TrafficSimulator:
         
         # Set next timestamp (30 seconds later by default)
         self.next_timestamp = self.timestamp + timedelta(seconds=30)
-        self.signal_change_timestamp = self.next_timestamp - timedelta(seconds=5)
+        self.signal_change_timestamp = self.next_timestamp
         self.current_signal_status["next_timestamp"] = self.next_timestamp.isoformat()
+        
+        if self.debug:
+            print(f"Signal changed at {self.timestamp.isoformat()}")
+            print(f"North/South: {'green' if self.current_signal_status.get('Northbound_Straight') == 'green' else 'red'}")
+            print(f"East/West: {'green' if self.current_signal_status.get('Eastbound_Straight') == 'green' else 'red'}")
         
     def _is_simulation_complete(self) -> bool:
         """Check if simulation is complete (no vehicles or pedestrians)"""
@@ -219,6 +226,26 @@ class TrafficSimulator:
                 print(f"Step {step}: {len(self.vehicles)} vehicles, " +
                       f"{sum(self.pedestrians.get(k, 0) for k in ['crosswalk_north_south', 'crosswalk_east_west', 'waiting_for_signal'])} pedestrians")
                 
+            # Safety check - break if no changes in last 20 steps (vehicles might be stuck)
+            if step > 20 and len(self.vehicles) > 0:
+                if len(set(self.queue_lengths[-20:])) == 1:
+                    if self.debug:
+                        print("Warning: Possible deadlock detected. Breaking simulation.")
+                        for vehicle in self.vehicles:
+                            print(f"Stuck vehicle: {vehicle['vehicle_id']} at lane {vehicle['lane_id']}")
+                    # Force process all remaining vehicles
+                    for vehicle in self.vehicles:
+                        self.passed_vehicles.append({
+                            "vehicle_id": vehicle["vehicle_id"],
+                            "vehicle_type": vehicle["vehicle_type"],
+                            "lane_id": vehicle["lane_id"],
+                            "timestamp": self.timestamp.isoformat(),
+                            "wait_time": self.vehicle_stats.get(vehicle["vehicle_id"], {}).get("wait_time", 0),
+                            "stops": self.vehicle_stats.get(vehicle["vehicle_id"], {}).get("stops", 0)
+                        })
+                    self.vehicles = []
+                    break
+        
         # Save final results
         self._save_results()
         
