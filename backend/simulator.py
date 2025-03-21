@@ -25,6 +25,7 @@ class TrafficSimulator:
         
         # Initialize state variables
         self.current_signal_status = copy.deepcopy(self.scenario["signal_status"])
+        self.reasoning = "Initial signal status"
         self.vehicles = copy.deepcopy(self.scenario["vehicle_data"])
         self.pedestrians = copy.deepcopy(self.scenario["pedestrians"])
         
@@ -65,6 +66,7 @@ class TrafficSimulator:
         state = {
             "timestamp": self.timestamp.isoformat(),
             "signal_status": copy.deepcopy(self.current_signal_status),
+            "reasoning": self.reasoning,
             "vehicles": copy.deepcopy(self.vehicles),
             "pedestrians": copy.deepcopy(self.pedestrians),
             "queue_length": self._calculate_queue_length(),
@@ -83,7 +85,7 @@ class TrafficSimulator:
         
         for vehicle in self.vehicles:
             vehicle_id = vehicle["vehicle_id"]
-            lane_id = vehicle["lane_id"]
+            destination = vehicle["destination"]
             
             # Initialize vehicle stats if first time seeing this vehicle
             if vehicle_id not in self.vehicle_stats:
@@ -111,23 +113,21 @@ class TrafficSimulator:
                         updated_vehicles.append(vehicle)
                         continue
                 
-                # Match lane_id to signal configuration key
-                if lane_id in self.current_signal_status:
-                    can_proceed = self.current_signal_status[lane_id] == "green"
+                # Match destination to signal configuration key
+                if destination in self.current_signal_status:
+                    can_proceed = self.current_signal_status[destination] == "green"
                     
                     # Special handling for left turns (yield to pedestrians)
-                    if can_proceed and "_Left" in lane_id:
+                    if can_proceed and "_Left" in destination:
                         # Determine which crosswalk this left turn crosses
-                        # In Singapore right-hand drive context:
-                        # North/South Left turns cross East/West pedestrians
-                        # East/West Left turns cross North/South pedestrians
+                        # In Singapore right-hand drive context: North/South Left turns cross East/West pedestrians, East/West Left turns cross North/South pedestrians
                         relevant_crosswalk = None
                         relevant_signal = None
                         
-                        if "Northbound" in lane_id or "Southbound" in lane_id:
+                        if "Northbound" in destination or "Southbound" in destination:
                             relevant_crosswalk = "crosswalk_east_west"
                             relevant_signal = "Crosswalk_East_West"
-                        elif "Eastbound" in lane_id or "Westbound" in lane_id:
+                        elif "Eastbound" in destination or "Westbound" in destination:
                             relevant_crosswalk = "crosswalk_north_south"
                             relevant_signal = "Crosswalk_North_South"
                         
@@ -139,24 +139,19 @@ class TrafficSimulator:
                             if self.debug:
                                 print(f"Vehicle {vehicle_id} yielding to pedestrians at {relevant_crosswalk}")
                 
-                # Check for emergency vehicles - they can proceed regardless
-                if vehicle.get("emergency_vehicle", False) and vehicle.get("emergency_status", {}).get("lights_active", False):
-                    can_proceed = True
-                    if self.debug:
-                        print(f"Emergency vehicle {vehicle_id} proceeding through intersection")
-                
                 if can_proceed:
                     # Vehicle passes through intersection
                     self.passed_vehicles.append({
                         "vehicle_id": vehicle_id,
                         "vehicle_type": vehicle["vehicle_type"],
-                        "lane_id": lane_id,
+                        "lane_id": vehicle["lane_id"],
+                        "destination": destination,
                         "timestamp": self.timestamp.isoformat(),
                         "wait_time": self.vehicle_stats[vehicle_id]["wait_time"],
                         "stops": self.vehicle_stats[vehicle_id]["stops"]
                     })
                     if self.debug:
-                        print(f"Vehicle {vehicle_id} passed through intersection via {lane_id}")
+                        print(f"Vehicle {vehicle_id} passed through intersection via {destination}")
                     continue
                 else:
                     # Vehicle stops at intersection
@@ -196,7 +191,7 @@ class TrafficSimulator:
         
     def _change_signal(self):
         """Change the traffic signal using the strategy"""
-        self.current_signal_status = self.strategy.get_next_signal_status(
+        self.current_signal_status, self.reasoning = self.strategy.get_next_signal_status(
             self.current_signal_status,
             self.vehicles,
             self.pedestrians,
@@ -270,7 +265,7 @@ class TrafficSimulator:
                     if self.debug:
                         print("Warning: Possible deadlock detected. Breaking simulation.")
                         for vehicle in self.vehicles:
-                            print(f"Stuck vehicle: {vehicle['vehicle_id']} at lane {vehicle['lane_id']}")
+                            print(f"Stuck vehicle: {vehicle['vehicle_id']} at lane {vehicle['lane_id']} to {vehicle['destination']}")
                             print(f"Signal status for lane: {self.current_signal_status.get(vehicle['lane_id'], 'unknown')}")
                     
                     # Force process all remaining vehicles
@@ -279,6 +274,7 @@ class TrafficSimulator:
                             "vehicle_id": vehicle["vehicle_id"],
                             "vehicle_type": vehicle["vehicle_type"],
                             "lane_id": vehicle["lane_id"],
+                            "destination": vehicle["destination"],
                             "timestamp": self.timestamp.isoformat(),
                             "wait_time": self.vehicle_stats.get(vehicle["vehicle_id"], {}).get("wait_time", 0),
                             "stops": self.vehicle_stats.get(vehicle["vehicle_id"], {}).get("stops", 0)

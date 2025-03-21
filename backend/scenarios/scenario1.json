@@ -1,108 +1,118 @@
 {
-    "vehicle_data": [
-      {
-        "vehicle_id": "V1001",
-        "lane_id": "Southbound_Straight",
-        "speed_kmh": 4,
-        "distance_to_intersection_m": 5.2,
-        "destination": "Southbound",
-        "vehicle_type": "car",
-        "estimated_arrival_time": "2025-03-19T08:00:05",
-        "emergency_vehicle": false
-      },
-      {
-        "vehicle_id": "V1002",
-        "lane_id": "Southbound_Straight",
-        "speed_kmh": 3,
-        "distance_to_intersection_m": 10.5,
-        "destination": "Southbound",
-        "vehicle_type": "suv",
-        "estimated_arrival_time": "2025-03-19T08:00:08",
-        "emergency_vehicle": false
-      },
-      {
-        "vehicle_id": "V1003",
-        "lane_id": "Southbound_Left",
-        "speed_kmh": 5,
-        "distance_to_intersection_m": 6.8,
-        "destination": "Westbound",
-        "vehicle_type": "sedan",
-        "estimated_arrival_time": "2025-03-19T08:00:06",
-        "emergency_vehicle": false
-      },
-      {
-        "vehicle_id": "V1004",
-        "lane_id": "Southbound_Right",
-        "speed_kmh": 2,
-        "distance_to_intersection_m": 12.8,
-        "destination": "Westbound",
-        "vehicle_type": "car",
-        "estimated_arrival_time": "2025-03-19T08:00:09",
-        "emergency_vehicle": false
-      },
-      {
-        "vehicle_id": "V1005",
-        "lane_id": "Southbound_Straight",
-        "speed_kmh": 10,
-        "distance_to_intersection_m": 125.8,
-        "destination": "Westbound",
-        "vehicle_type": "car",
-        "estimated_arrival_time": "2025-03-19T08:01:50",
-        "emergency_vehicle": false
-      }
-    ],
-    "traffic_metrics": {
-      "congestion_level": "low",
-      "historical_comparison": {
-        "typical_congestion_level": "low",
-        "percent_difference": 5,
-        "timestamp": "2025-03-19T08:00:00"
-      },
-      "average_throughput_sec": {
-        "Northbound_Straight": 120,
-        "Northbound_Left": 90,
-        "Northbound_Right": 150,
-        "Eastbound_Straight": 0,
-        "Eastbound_Left": 0,
-        "Eastbound_Right": 0,
-        "Southbound_Straight": 0,
-        "Southbound_Left": 0,
-        "Southbound_Right": 0,
-        "Westbound_Straight": 0,
-        "Westbound_Left": 0,
-        "Westbound_Right": 0
-      }
+  "vehicle_data": [
+    {
+      "vehicle_id": "V1001",
+      "lane_id": "Southbound_Straight",
+      "speed_kmh": 4,
+      "distance_to_intersection_m": 5.2,
+      "destination": "Southbound_Straight",
+      "vehicle_type": "car",
+      "estimated_arrival_time": "2025-03-19T08:00:05",
+      "emergency_vehicle": false
     },
-    "pedestrians": {
-      "crosswalk_north_south": 0,
-      "crosswalk_east_west": 0,
+    {
+      "vehicle_id": "V1003",
+      "lane_id": "Southbound_Left",
+      "speed_kmh": 5,
+      "distance_to_intersection_m": 6.8,
+      "destination": "Southbound_Left",
+      "vehicle_type": "sedan",
+      "estimated_arrival_time": "2025-03-19T08:00:06",
+      "emergency_vehicle": false
+    },
+    {
+      "vehicle_id": "V1002",
+      "lane_id": "Southbound_Straight",
+      "speed_kmh": 3,
+      "distance_to_intersection_m": 10.5,
+      "destination": "Southbound_Straight",
+      "vehicle_type": "suv",
+      "estimated_arrival_time": "2025-03-19T08:00:08",
+      "emergency_vehicle": false
+    },
+    {
+      "vehicle_id": "V1004",
+      "lane_id": "Southbound_Right",
+      "speed_kmh": 2,
+      "distance_to_intersection_m": 12.8,
+      "destination": "Southbound_Right",
+      "vehicle_type": "car",
+      "estimated_arrival_time": "2025-03-19T08:00:09",
+      "emergency_vehicle": false
+    },
+    {
+      "vehicle_id": "V1005",
+      "lane_id": "Southbound_Straight",
+      "speed_kmh": 13,
+      "distance_to_intersection_m": 125.8,
+      "destination": "Southbound_Straight",
+      "vehicle_type": "car",
+      "estimated_arrival_time": "2025-03-19T08:01:50",
+      "emergency_vehicle": false
+    },
+    {
+      "vehicle_id": "V1006",
+      "lane_id": "Southbound_Left",
+      "speed_kmh": 10,
+      "distance_to_intersection_m": 145.8,
+      "destination": "Southbound_Straight",
+      "vehicle_type": "sedan",
+      "estimated_arrival_time": "2025-03-19T08:01:55",
+      "emergency_vehicle": false
+    }
+  ],
+  "traffic_metrics": {
+    "congestion_level": "low",
+    "historical_comparison": {
+      "typical_congestion_level": "low",
+      "percent_difference": 5,
       "timestamp": "2025-03-19T08:00:00"
     },
-    "historical_patterns": {
-      "predicted_volume_trend": "stable",
-      "seasonal_factors": ["normal"]
-    },
-    "context": {
-      "weather": "Clear",
-      "peak_period": false,
-      "incident_reported": false
-    },
-    "signal_status": {
-      "Northbound_Straight": "red",
-      "Northbound_Left": "red",
-      "Northbound_Right": "red",
-      "Eastbound_Straight": "green",
-      "Eastbound_Left": "green",
-      "Eastbound_Right": "green",
-      "Southbound_Straight": "red",
-      "Southbound_Left": "red",
-      "Southbound_Right": "red",
-      "Westbound_Straight": "green",
-      "Westbound_Left": "green",
-      "Westbound_Right": "green",
-      "Crosswalk_North_South": "do_not_walk",
-      "Crosswalk_East_West": "do_not_walk",
-      "last_changed": "2025-03-19T07:59:30",
-      "next_timestamp": "2025-03-19T08:00:00"
+    "average_throughput_sec": {
+      "Northbound_Straight": 120,
+      "Northbound_Left": 90,
+      "Northbound_Right": 150,
+      "Eastbound_Straight": 0,
+      "Eastbound_Left": 0,
+      "Eastbound_Right": 0,
+      "Southbound_Straight": 0,
+      "Southbound_Left": 0,
+      "Southbound_Right": 0,
+      "Westbound_Straight": 0,
+      "Westbound_Left": 0,
+      "Westbound_Right": 0
     }
+  },
+  "pedestrians": {
+    "crosswalk_north_south": 0,
+    "crosswalk_east_west": 0,
+    "timestamp": "2025-03-19T08:00:00"
+  },
+  "historical_patterns": {
+    "predicted_volume_trend": "stable",
+    "seasonal_factors": ["normal"]
+  },
+  "context": {
+    "weather": "Clear",
+    "peak_period": false,
+    "incident_reported": false
+  },
+  "signal_status": {
+    "Northbound_Straight": "green",
+    "Northbound_Left": "green",
+    "Northbound_Right": "red",
+    "Southbound_Straight": "green",
+    "Southbound_Left": "green",
+    "Southbound_Right": "red",
+    "Eastbound_Straight": "red",
+    "Eastbound_Left": "red",
+    "Eastbound_Right": "red",
+    "Westbound_Straight": "red",
+    "Westbound_Left": "red",
+    "Westbound_Right": "red",
+    "Crosswalk_North_South": "green",
+    "Crosswalk_East_West": "red",
+    "last_changed": "2025-03-19T07:59:30",
+    "next_timestamp": "2025-03-19T08:00:00"
   }
+}

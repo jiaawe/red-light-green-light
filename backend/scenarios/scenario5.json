@@ -2,27 +2,20 @@
     "vehicle_data": [
       {
         "vehicle_id": "V4001",
-        "lane_id": "Eastbound_Straight",
-        "speed_kmh": 65.8,
-        "distance_to_intersection_m": 420.5,
-        "destination": "Westbound",
-        "vehicle_type": "ambulance",
-        "estimated_arrival_time": "2025-03-19T12:15:25",
-        "emergency_vehicle": true,
-        "emergency_status": {
-          "lights_active": true,
-          "siren_active": true,
-          "priority_level": "high",
-          "destination_hospital": "Memorial Hospital",
-          "estimated_arrival_hospital": "2025-03-19T12:22:10"
-        }
+        "lane_id": "Eastbound_Left",
+        "speed_kmh": 21.3,
+        "distance_to_intersection_m": 66.5,
+        "destination": "Eastbound_Straight",
+        "vehicle_type": "car",
+        "estimated_arrival_time": "2025-03-19T12:15:11",
+        "emergency_vehicle": false
       },
       {
         "vehicle_id": "V4002",
         "lane_id": "Eastbound_Straight",
         "speed_kmh": 25.3,
-        "distance_to_intersection_m": 45.8,
-        "destination": "Westbound",
+        "distance_to_intersection_m": 75.8,
+        "destination": "Eastbound_Straight",
         "vehicle_type": "car",
         "estimated_arrival_time": "2025-03-19T12:15:12",
         "emergency_vehicle": false
@@ -32,9 +25,9 @@
         "lane_id": "Eastbound_Straight",
         "speed_kmh": 22.7,
         "distance_to_intersection_m": 85.2,
-        "destination": "Westbound",
+        "destination": "Eastbound_Straight",
         "vehicle_type": "suv",
-        "estimated_arrival_time": "2025-03-19T12:15:22",
+        "estimated_arrival_time": "2025-03-19T12:15:20",
         "emergency_vehicle": false
       },
       {
@@ -42,9 +35,9 @@
         "lane_id": "Southbound_Left",
         "speed_kmh": 18.4,
         "distance_to_intersection_m": 25.6,
-        "destination": "Eastbound",
+        "destination": "Southbound_Left",
         "vehicle_type": "sedan",
-        "estimated_arrival_time": "2025-03-19T12:15:08",
+        "estimated_arrival_time": "2025-03-19T12:15:23",
         "emergency_vehicle": false
       },
       {
@@ -52,9 +45,9 @@
         "lane_id": "Southbound_Straight",
         "speed_kmh": 32.5,
         "distance_to_intersection_m": 110.4,
-        "destination": "Northbound",
+        "destination": "Southbound_Straight",
         "vehicle_type": "car",
-        "estimated_arrival_time": "2025-03-19T12:15:26",
+        "estimated_arrival_time": "2025-03-19T12:15:24",
         "emergency_vehicle": false
       },
       {
@@ -62,19 +55,36 @@
         "lane_id": "Northbound_Straight",
         "speed_kmh": 29.7,
         "distance_to_intersection_m": 95.2,
-        "destination": "Southbound",
+        "destination": "Northbound_Straight",
         "vehicle_type": "car",
-        "estimated_arrival_time": "2025-03-19T12:15:24",
+        "estimated_arrival_time": "2025-03-19T12:15:25",
         "emergency_vehicle": false
       },
       {
         "vehicle_id": "V4007",
         "lane_id": "Westbound_Right",
+        "speed_kmh": 65.8,
+        "distance_to_intersection_m": 420.5,
+        "destination": "Westbound_Right",
+        "vehicle_type": "ambulance",
+        "estimated_arrival_time": "2025-03-19T12:15:26",
+        "emergency_vehicle": true,
+        "emergency_status": {
+          "lights_active": true,
+          "siren_active": true,
+          "priority_level": "high",
+          "destination_hospital": "Memorial Hospital",
+          "estimated_arrival_hospital": "2025-03-19T12:22:28"
+        }
+      },
+      {
+        "vehicle_id": "V4008",
+        "lane_id": "Westbound_Right",
         "speed_kmh": 15.6,
         "distance_to_intersection_m": 35.8,
-        "destination": "Northbound",
+        "destination": "Westbound_Right",
         "vehicle_type": "van",
-        "estimated_arrival_time": "2025-03-19T12:15:17",
+        "estimated_arrival_time": "2025-03-19T12:15:29",
         "emergency_vehicle": false
       }
     ],
@@ -107,7 +117,7 @@
       }
     },
     "pedestrians": {
-      "crosswalk_north_south": 3,
+      "crosswalk_north_south": 4,
       "crosswalk_east_west": 5,
       "timestamp": "2025-03-19T12:15:00"
     },
@@ -128,20 +138,20 @@
       }
     },
     "signal_status": {
-      "Northbound_Straight": "red",
-      "Northbound_Left": "red",
+      "Northbound_Straight": "green",
+      "Northbound_Left": "green",
       "Northbound_Right": "red",
-      "Eastbound_Straight": "green",
-      "Eastbound_Left": "red",
-      "Eastbound_Right": "green",
-      "Southbound_Straight": "red",
-      "Southbound_Left": "red",
+      "Southbound_Straight": "green",
+      "Southbound_Left": "green",
       "Southbound_Right": "red",
+      "Eastbound_Straight": "red",
+      "Eastbound_Left": "red",
+      "Eastbound_Right": "red",
       "Westbound_Straight": "red",
       "Westbound_Left": "red",
       "Westbound_Right": "red",
-      "Crosswalk_North_South": "do_not_walk",
-      "Crosswalk_East_West": "do_not_walk",
+      "Crosswalk_North_South": "green",
+      "Crosswalk_East_West": "red",
       "last_changed": "2025-03-19T12:14:45",
       "emergency_preemption": {
         "active": true,
