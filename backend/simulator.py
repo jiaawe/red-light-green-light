@@ -6,6 +6,7 @@ import copy
 
 # Import strategies and metrics
 from strategy.set_interval import SetIntervalStrategy
+from strategy.multi_agent import MultiAgentStrategy
 from utils.metrics import calculate_metrics
 
 class TrafficSimulator:
@@ -54,6 +55,8 @@ class TrafficSimulator:
         """Get the traffic signal strategy implementation"""
         if self.strategy_name == "set_interval":
             return SetIntervalStrategy(config_path="traffic_rules/traffic_configuration.json")
+        elif self.strategy_name == "multi_agent":
+            return MultiAgentStrategy(config_path="traffic_rules/traffic_configuration.json")
         else:
             raise ValueError(f"Unknown strategy: {self.strategy_name}")
             
