@@ -28,18 +28,16 @@ class SetIntervalStrategy:
                               weather: Dict[str, Any] = None,
                               context: Dict[str, Any] = None) -> Dict[str, Any]:
         
-        print(vehicles)
-        print(pedestrians)
         # Simply cycle to the next configuration
         self.current_index = (self.current_index + 1) % len(self.configurations)
         next_config = self.configurations[self.current_index]
         
         # Determine the duration based on the configuration type
         if "protected_right" in next_config or "protected_left" in next_config:
-            duration_seconds = 20  # 20 seconds for turning only
+            duration_seconds = 30  # 20 seconds for turning only
             reasoning = "Set interval for protected turn"
         else:
-            duration_seconds = 60  # 60 seconds for all others
+            duration_seconds = 90  # 60 seconds for all others
             reasoning = "Set interval for standard signal"
             
         # Get the signal configuration
