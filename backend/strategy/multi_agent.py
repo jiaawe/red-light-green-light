@@ -35,7 +35,7 @@ class MultiAgentStrategy:
         
         results = self.traffic_optimizer.optimize(
             configuration_state = {
-                "vehicles": vehicles,
+                "vehicles": self.aggregate_vehicles(vehicles),
                 "pedestrians": pedestrians,
                 "weather" : weather,
                 "context" : context
@@ -54,6 +54,50 @@ class MultiAgentStrategy:
         if context:
             next_signal["context_data"] = context
         
-        reasoning = 'Placeholder'
-        return next_signal, reasoning
+        justification = results["justification"]
+        return next_signal, justification
+    
+    def aggregate_vehicles(self, vehicles: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """
+        Aggregate vehicle data to provide a summary for the traffic optimizer.
+        
+        Args:
+            vehicles: List of vehicle data
+        
+        Returns:
+            Dict containing aggregated vehicle data
+        """
+       
+        aggregated_data = {
+            "total_count": len(vehicles),
+            "by_lane": {},
+            "by_destination": {},
+            "emergency_vehicles": []
+        }
+        
+        for vehicle in vehicles:
+            # Aggregate by lane
+            lane_id = vehicle.get("lane_id", "unknown")
+            if lane_id not in aggregated_data["by_lane"]:
+                aggregated_data["by_lane"][lane_id] = 0
+            aggregated_data["by_lane"][lane_id] += 1
+            
+            # Aggregate by destination
+            destination = vehicle.get("destination", "unknown")
+            if destination not in aggregated_data["by_destination"]:
+                aggregated_data["by_destination"][destination] = 0
+            aggregated_data["by_destination"][destination] += 1
+            
+            # Track emergency vehicles
+            if vehicle.get("emergency_vehicle", False):
+                aggregated_data["emergency_vehicles"].append({
+                    "vehicle_id": vehicle.get("vehicle_id"),
+                    "lane_id": lane_id,
+                    "destination": destination,
+                    "priority_level": vehicle.get("emergency_status", {}).get("priority_level", "medium"),
+                    "lights_active": vehicle.get("emergency_status", {}).get("lights_active", False),
+                    "siren_active": vehicle.get("emergency_status", {}).get("siren_active", False)
+                })
+
+        return aggregated_data
     

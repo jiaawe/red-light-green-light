@@ -28,6 +28,8 @@ class SetIntervalStrategy:
                               weather: Dict[str, Any] = None,
                               context: Dict[str, Any] = None) -> Dict[str, Any]:
         
+        print(vehicles)
+        print(pedestrians)
         # Simply cycle to the next configuration
         self.current_index = (self.current_index + 1) % len(self.configurations)
         next_config = self.configurations[self.current_index]

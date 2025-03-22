@@ -162,15 +162,15 @@
     }
   },
   "movements_description": [
-    {"id": "ns_straight_priority", "movement": "Vehicles move straight and turn left from North and South directions."},
-    {"id": "ew_straight_priority", "movement": "Vehicles move straight and turn left from East and West directions."},
-    {"id": "ns_protected_right", "movement": "Vehicles perform protected right turns from North and South directions only."},
-    {"id": "ew_protected_right", "movement": "Vehicles perform protected right turns from East and West directions only."},
-    {"id": "ns_protected_left", "movement": "Vehicles perform protected left turns from North and South directions only."},
-    {"id": "ew_protected_left", "movement": "Vehicles perform protected left turns from East and West directions only."},
-    {"id": "split_phase_north", "movement": "Vehicles from Northbound direction perform all movements (straight, left, and right) exclusively."},
-    {"id": "split_phase_south", "movement": "Vehicles from Southbound direction perform all movements (straight, left, and right) exclusively."},
-    {"id": "split_phase_east", "movement": "Vehicles from Eastbound direction perform all movements (straight, left, and right) exclusively."},
-    {"id": "split_phase_west", "movement": "Vehicles from Westbound direction perform all movements (straight, left, and right) exclusively."}
+    {"id": "ns_straight_priority", "movement": "Vehicles move straight and turn left from North and South directions. No Right Turns are allowed. Pedestrians cross North and South crosswalks. (Crosswalk_North_South"},
+    {"id": "ew_straight_priority", "movement": "Vehicles move straight and turn left from East and West directions. No Right Turns are allowed. Pedestrians cross East and West crosswalks. (Crosswalk_East_West)"},
+    {"id": "ns_protected_right", "movement": "Vehicles perform protected right turns from North and South directions only. No other vehicular movement and pedestrain crossing are allowed."},
+    {"id": "ew_protected_right", "movement": "Vehicles perform protected right turns from East and West directions only. No other vehicular movements and pedestrain crossing are allowed."},
+    {"id": "ns_protected_left", "movement": "Vehicles perform protected left turns from North and South directions only. No other vehicular movements and pedestrain crossing are allowed."},
+    {"id": "ew_protected_left", "movement": "Vehicles perform protected left turns from East and West directions only. No other vehicular movements and pedestrain crossing are allowed."},
+    {"id": "split_phase_north", "movement": "Vehicles from the North direction perform all movements (straight, left, and right) exclusively. No pedestrian crossing is allowed."},
+    {"id": "split_phase_south", "movement": "Vehicles from the South direction perform all movements (straight, left, and right) exclusively. No pedestrian crossing is allowed."},
+    {"id": "split_phase_east", "movement": "Vehicles from the East direction perform all movements (straight, left, and right) exclusively. No pedestrian crossing is allowed."},
+    {"id": "split_phase_west", "movement": "Vehicles from the West direction perform all movements (straight, left, and right) exclusively. No pedestrian crossing is allowed."}
   ]
 }

@@ -31,8 +31,11 @@ class TrafficOptimizer:
         """
         self.api_key = api_key or os.environ.get("OPENAI_API_KEY")
         self.client = OpenAI(api_key=self.api_key)
-        self.traffic_config = self.load_json_file(traffic_config_path)
-        # Initialize memory as a property
+
+        # Initialise Traffic Configuration
+        self.traffic_config = self.load_json_file(traffic_config_path)["movements_description"] # Try using movements_descriptions only
+
+        # Initialize memory - Tracks 5 most recent configurations (from recent to oldest)
         self.memory = memory if memory is not None else []
         
     def optimize(
@@ -87,21 +90,17 @@ class TrafficOptimizer:
             # Create new memory entry
             new_memory_entry = {
                 "configuration": result["selected_configuration"],
-                "duration": result["duration_seconds"],
-                "timestamp": datetime.now().isoformat()
+                "duration": result["duration_seconds"]
             }
             
-            # Update memory - add the new entry at the beginning, keeping only the 10 most recent entries
+            # Update memory - add the new entry at the beginning, keeping only the 10 most recent entries.
             updated_memory = [new_memory_entry]
             if memory_to_use:
-                updated_memory.extend(memory_to_use[:min(9, len(memory_to_use))])
-            
-            # Add the updated memory to the result
-            result["updated_memory"] = updated_memory
+                updated_memory.extend(memory_to_use[:min(5, len(memory_to_use))])
             
             # Update the instance memory
             self.memory = updated_memory
-                
+
             return result
             
         except json.JSONDecodeError:
@@ -109,68 +108,25 @@ class TrafficOptimizer:
         except Exception as e:
             raise RuntimeError(f"Error processing API response: {str(e)}")
     
-    def get_memory(self) -> List[Dict[str, Any]]:
-        """
-        Get the current memory state.
-        
-        Returns:
-            The current memory list
-        """
-        return self.memory
-    
-    def export_memory(self, path: str) -> None:
-        """
-        Export the current memory to a JSON file.
-        
-        Args:
-            path: Path where to save the memory
-        """
-        self.save_json_file(path, self.memory)
-    
-    def import_memory(self, path: str) -> None:
-        """
-        Import memory from a JSON file.
-        
-        Args:
-            path: Path to the memory JSON file
-        """
-        self.memory = self.load_json_file(path)
-    
-    def save_result(self, result: Dict[str, Any], path: str = "backend/inference/last_optimization_result.json") -> None:
-        """
-        Save the optimization result to a JSON file.
-        
-        Args:
-            result: The optimization result to save
-            path: Path where to save the result
-        """
-        self.save_json_file(path, result)
-    
     @staticmethod
     def load_json_file(file_path: str) -> Dict:
         """Load and parse a JSON file."""
         with open(file_path, 'r') as file:
             return json.load(file)
 
-    @staticmethod
-    def save_json_file(file_path: str, data: Dict) -> None:
-        """Save data to a JSON file."""
-        with open(file_path, 'w') as file:
-            json.dump(data, file, indent=2)
+# if __name__ == "__main__":
+#     # Create optimizer instance with empty memory
+#     optimizer = TrafficOptimizer()
+    
+#     # Load configuration state
+#     with open("backend/counter/configuration_state.json", "r") as file:
+#         configuration_state = json.load(file)
 
-if __name__ == "__main__":
-    # Create optimizer instance with empty memory
-    optimizer = TrafficOptimizer()
+#     # Run the optimization
+#     result = optimizer.optimize(configuration_state=configuration_state)
     
-    # Load configuration state
-    with open("backend/counter/configuration_state.json", "r") as file:
-        configuration_state = json.load(file)
-
-    # Run the optimization
-    result = optimizer.optimize(configuration_state=configuration_state)
+#     print(f"Selected configuration: {result['selected_configuration']}")
+#     print(f"Duration (seconds): {result['duration_seconds']}")
     
-    print(f"Selected configuration: {result['selected_configuration']}")
-    print(f"Duration (seconds): {result['duration_seconds']}")
-    
-    # You could also save the full result for debugging
-    optimizer.save_result(result)
+#     # You could also save the full result for debugging
+#     optimizer.save_result(result)
