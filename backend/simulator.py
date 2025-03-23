@@ -141,6 +141,8 @@ class TrafficSimulator:
                 
                 if can_proceed:
                     # Vehicle passes through intersection
+                    vehicle["speed_kmh"] = 33.9
+                    
                     self.passed_vehicles.append({
                         "vehicle_id": vehicle_id,
                         "vehicle_type": vehicle["vehicle_type"],
@@ -148,10 +150,11 @@ class TrafficSimulator:
                         "destination": destination,
                         "timestamp": self.timestamp.isoformat(),
                         "wait_time": self.vehicle_stats[vehicle_id]["wait_time"],
+                        "speed": vehicle["speed_kmh"],
                         "stops": self.vehicle_stats[vehicle_id]["stops"]
                     })
                     if self.debug:
-                        print(f"Vehicle {vehicle_id} passed through intersection via {destination}")
+                        print(f"Vehicle {vehicle_id} passed through intersection via {destination} at speed {vehicle['speed_kmh']} km/h")
                     continue
                 else:
                     # Vehicle stops at intersection
@@ -306,6 +309,10 @@ class TrafficSimulator:
         with open(f"{self.experiment_dir}/passed_vehicles.json", "w") as file:
             json.dump(self.passed_vehicles, file, indent=2)
             
+        # Save passed pedestrian
+        with open(f"{self.experiment_dir}/passed_pedestrians.json", "w") as file:
+            json.dump(self.passed_pedestrians, file, indent=2)
+            
         # Save original scenario
         with open(f"{self.experiment_dir}/scenario.json", "w") as file:
             json.dump(self.scenario, file, indent=2)
@@ -316,7 +323,7 @@ class TrafficSimulator:
             
 if __name__ == "__main__":
     # Example usage
-    simulator = TrafficSimulator("scenarios/scenario5.json", strategy="set_interval", debug=True)
+    simulator = TrafficSimulator("scenarios/scenario1.json", strategy="set_interval", debug=True)
     experiment_dir, metrics = simulator.run()
     
     print(f"Simulation complete. Results saved to {experiment_dir}")
