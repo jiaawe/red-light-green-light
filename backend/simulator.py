@@ -306,7 +306,7 @@ class TrafficSimulator:
             self.experiment_dir
         )
         
-        return self.experiment_dir, metrics
+        return self.experiment_dir, metrics, self.states
         
     def _save_results(self):
         """Save simulation results to the experiment directory"""

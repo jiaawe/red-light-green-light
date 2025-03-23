@@ -3,3 +3,4 @@ langchain-openai==0.3.9
 pydantic==2.6.1
 matplotlib==3.8.2
 numpy==1.26.3
+flask==3.1.0
