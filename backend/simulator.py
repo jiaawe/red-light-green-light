@@ -67,7 +67,7 @@ class TrafficSimulator:
             "timestamp": self.timestamp.isoformat(),
             "signal_status": copy.deepcopy(self.current_signal_status),
             "reasoning": self.reasoning,
-            "vehicles": copy.deepcopy(self.vehicles),
+            "vehicles": copy.deepcopy(self.passed_vehicles) + copy.deepcopy(self.vehicles),
             "pedestrians": copy.deepcopy(self.pedestrians),
             "queue_length": self._calculate_queue_length(),
             "passed_vehicles_count": len(self.passed_vehicles),
@@ -141,14 +141,17 @@ class TrafficSimulator:
                 
                 if can_proceed:
                     # Vehicle passes through intersection
-                    vehicle["speed_kmh"] = 33.9
                     
                     self.passed_vehicles.append({
                         "vehicle_id": vehicle_id,
                         "vehicle_type": vehicle["vehicle_type"],
                         "lane_id": vehicle["lane_id"],
                         "destination": destination,
+                        "distance_to_intersection_m": -10,
                         "timestamp": self.timestamp.isoformat(),
+                        "estimated_arrival_time": self.timestamp.isoformat(),
+                        "emergency_vehicle": vehicle["emergency_vehicle"],
+                        "speed_kmh": 33.9,
                         "wait_time": self.vehicle_stats[vehicle_id]["wait_time"],
                         "speed": vehicle["speed_kmh"],
                         "stops": self.vehicle_stats[vehicle_id]["stops"]
@@ -170,6 +173,11 @@ class TrafficSimulator:
             updated_vehicles.append(vehicle)
             
         self.vehicles = updated_vehicles
+    
+    def _update_passed_vehicles(self, delta_time: int):
+        """Update passed vehicles based on signal status"""
+        for vehicle in self.passed_vehicles:
+            vehicle["distance_to_intersection_m"] -= vehicle["speed_kmh"] / 3.6 * delta_time
         
     def _update_pedestrians(self, delta_time: int):
         """Update pedestrian counts based on crosswalk signals"""
@@ -251,6 +259,7 @@ class TrafficSimulator:
             # This ensures pedestrians are cleared before allowing vehicles to turn left
             self._update_pedestrians(delta_time)
             self._update_vehicles(delta_time)
+            self._update_passed_vehicles(delta_time)
             
             # Save current state
             self._save_state()
@@ -323,7 +332,7 @@ class TrafficSimulator:
             
 if __name__ == "__main__":
     # Example usage
-    simulator = TrafficSimulator("scenarios/scenario1.json", strategy="set_interval", debug=True)
+    simulator = TrafficSimulator("scenarios/scenario5.json", strategy="set_interval", debug=True)
     experiment_dir, metrics = simulator.run()
     
     print(f"Simulation complete. Results saved to {experiment_dir}")
