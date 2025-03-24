@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 from openai import OpenAI
 from typing import Dict, List, Any, Optional
-from prompts.prompts import CONTROLLER_PROMPT
+from traffic_optimizer.prompts import CONTROLLER_PROMPT
 from dotenv import load_dotenv
 
 # Load environment variables

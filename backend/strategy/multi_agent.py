@@ -2,7 +2,7 @@ import json
 import os
 import logging
 from typing import Dict, List, Any
-from inference.traffic_optimizer import TrafficOptimizer
+from traffic_optimizer.traffic_optimizer import TrafficOptimizer
 
 class MultiAgentStrategy:
     """

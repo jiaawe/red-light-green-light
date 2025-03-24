@@ -2,7 +2,7 @@ import requests
 import json
 
 # URL for the API endpoints
-base_url = "http://localhost:5000/api"
+base_url = "http://localhost:8000/api"
 
 # 1. Add a scenario
 scenario_data = {
@@ -64,8 +64,8 @@ print(response.json())
 
 # 2. Run a simulation
 simulation_request = {
-    "scenario": "test_scenario",
-    "strategy": "set_interval"
+    "scenario": "scenario5",
+    "strategy": "multi_agent"
 }
 response = requests.post(f"{base_url}/run", json=simulation_request)
 

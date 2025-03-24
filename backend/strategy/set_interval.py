@@ -34,10 +34,10 @@ class SetIntervalStrategy:
         
         # Determine the duration based on the configuration type
         if "protected_right" in next_config or "protected_left" in next_config:
-            duration_seconds = 30  # 20 seconds for turning only
+            duration_seconds = 25  # 25 seconds for turning only
             reasoning = "Set interval for protected turn"
         else:
-            duration_seconds = 90  # 60 seconds for all others
+            duration_seconds = 85  # 85 seconds for all others
             reasoning = "Set interval for standard signal"
             
         # Get the signal configuration
