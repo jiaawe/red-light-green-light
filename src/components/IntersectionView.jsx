@@ -1,6 +1,25 @@
 import { useState, useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Navigation,
+  Car,
+  Truck,
+  Bus,
+  Bike,
+  Tractor,
+  Clock,
+  AlertTriangle,
+  ArrowUp,
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
+  LayoutGrid,
+  Maximize2,
+  Minimize2,
+  RefreshCcw,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const IntersectionView = ({ currentState, previousState }) => {
   const { vehicles = [], signal_status = {} } = currentState || {};
@@ -400,10 +419,17 @@ const IntersectionView = ({ currentState, previousState }) => {
     <Card className="shadow-md">
       <CardHeader className="pb-2 border-b">
         <div className="flex justify-between items-center">
-          <CardTitle>Intersection View</CardTitle>
+          <CardTitle className="flex items-center">
+            <LayoutGrid className="h-5 w-5 mr-2" />
+            Intersection View
+          </CardTitle>
           <div className="flex items-center gap-2">
-            <Badge variant="outline">{vehicles.length} vehicles</Badge>
-            <div className="text-sm text-gray-500">
+            <Badge variant="outline" className="flex items-center gap-1">
+              <Car className="h-3 w-3" />
+              <span>{vehicles.length} vehicles</span>
+            </Badge>
+            <div className="text-sm text-gray-500 flex items-center">
+              <Clock className="h-3.5 w-3.5 mr-1" />
               {currentState?.timestamp
                 ? new Date(currentState.timestamp).toLocaleTimeString()
                 : ""}
