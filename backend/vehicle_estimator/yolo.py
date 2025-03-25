@@ -1,12 +1,16 @@
 import argparse
-from collections import defaultdict, deque
-
 import cv2
 import numpy as np
-from ultralytics import YOLO
-
 import supervision as sv
+from collections import defaultdict, deque
+from ultralytics import YOLO
+from view_transformer import ViewTransformer
 
+YOLO_PATH = "yolov8x.pt"
+DEVICE = "mps" # Change to cuda if needed
+
+# Sample Video Lanes
+# The overall area of interest is defined by the polygon with the following vertices:
 SOURCE = np.array([
     (930, 1700),   # Bottom-left corner of the leftmost lane
     (2750, 1700),  # Bottom-right corner of the rightmost lane
@@ -14,8 +18,49 @@ SOURCE = np.array([
     (1550, 50)     # Top-left taper of lane area
 ])
 
-TARGET_WIDTH = 25
-TARGET_HEIGHT = 250
+# Lane-specific polygons and bounding box colour choice
+LANES = {
+    "Northbound_Right": {
+        "polygon": np.array([
+            (930, 1700),
+            (1390, 1700),
+            (1750, 50),
+            (1550, 50)
+        ]),
+        "color": sv.Color.GREEN
+    },
+    "Northbound_Straight": {
+        "polygon": np.array([
+            (1430, 1700),
+            (1800, 1700),
+            (2050, 50),
+            (1790, 50)
+        ]),
+        "color": sv.Color.BLUE
+    },
+    "Northbound_Straight2": {
+        "polygon": np.array([
+            (1850, 1700),
+            (2150, 1700),
+            (2350, 50),
+            (2080, 50)
+        ]),
+        "color": sv.Color.YELLOW
+    },
+    "Northbound_Left": {
+        "polygon": np.array([
+            (2200, 1700),
+            (2550, 1700),
+            (2600, 50),
+            (2380, 50)
+        ]),
+        "color": sv.Color.WHITE
+    }
+}
+
+# Real Life Distance Metrics (in meters)
+TARGET_WIDTH = 10
+TARGET_HEIGHT = 30
 
 TARGET = np.array(
     [
@@ -26,21 +71,11 @@ TARGET = np.array(
     ]
 )
 
-class ViewTransformer:
-    # This class is used to transform points from the original frame to a "bird's-eye" view
-    def __init__(self, source: np.ndarray, target: np.ndarray) -> None:
-        source = source.astype(np.float32)
-        target = target.astype(np.float32)
-        self.m = cv2.getPerspectiveTransform(source, target)  # Compute transformation matrix
-
-    def transform_points(self, points: np.ndarray) -> np.ndarray:
-        # Transform a set of points to the new perspective
-        if points.size == 0:
-            return points
-
-        reshaped_points = points.reshape(-1, 1, 2).astype(np.float32)
-        transformed_points = cv2.perspectiveTransform(reshaped_points, self.m)
-        return transformed_points.reshape(-1, 2)
+# Creating Polygon Zones for each lane
+lane_zones = {
+    lane_name: sv.PolygonZone(polygon=lane_data["polygon"])
+    for lane_name, lane_data in LANES.items()
+}
 
 def parse_arguments() -> argparse.Namespace:
     # Setup command-line argument parsing
@@ -79,7 +114,7 @@ if __name__ == "__main__":
     video_info = sv.VideoInfo.from_video_path(video_path=args.source_video_path)
 
     # Load YOLO model using ultralytics
-    model = YOLO("yolov8x.pt").to("mps")
+    model = YOLO(YOLO_PATH).to(DEVICE)
 
     # ByteTrack for tracking objects across frames
     byte_track = sv.ByteTrack(
@@ -95,8 +130,8 @@ if __name__ == "__main__":
     # Annotators for drawing boxes, labels, and traces
     box_annotator = sv.BoxAnnotator(thickness=thickness)
     label_annotator = sv.LabelAnnotator(
-        text_scale=text_scale,
-        text_thickness=thickness,
+        text_scale=text_scale-0.4,
+        text_thickness=thickness-2,
         text_position=sv.Position.BOTTOM_CENTER,
     )
     trace_annotator = sv.TraceAnnotator(
@@ -110,10 +145,14 @@ if __name__ == "__main__":
 
     # Define the region of interest (polygon) and view transformer
     polygon_zone = sv.PolygonZone(polygon=SOURCE)
+
     view_transformer = ViewTransformer(source=SOURCE, target=TARGET)
 
     # Store y-coordinates for each tracked ID to calculate speed
     coordinates = defaultdict(lambda: deque(maxlen=video_info.fps))
+
+    # Store vehicle counts for each lane
+    lane_counts = {lane_name: 0 for lane_name in LANES}
 
     with sv.VideoSink(args.target_video_path, video_info) as sink:
         # Iterate through frames
@@ -135,7 +174,15 @@ if __name__ == "__main__":
             # Update trackers
             detections = byte_track.update_with_detections(detections=detections)
 
-            print(detections)
+            # Reset lane counts for each frame
+            for k, v in lane_counts.items():
+                lane_counts[k] = 0
+            
+            # Count vehicles in each lane
+            for lane_name, zone in lane_zones.items():
+                lane_detections = detections[zone.trigger(detections)]
+                lane_counts[lane_name] = len(lane_detections)
+
             # Get the bottom-center anchor points of tracked objects
             points = detections.get_anchors_coordinates(
                 anchor=sv.Position.BOTTOM_CENTER
@@ -174,11 +221,35 @@ if __name__ == "__main__":
             )
 
             # Draw the polygon zone on the frame
-            sv.draw_polygon(
-                annotated_frame,
-                polygon=SOURCE,
-                color=sv.Color.RED
-            )
+            # sv.draw_polygon(
+            #     annotated_frame,
+            #     polygon=SOURCE,
+            #     color=sv.Color.RED
+            # )
+
+            # Draw lane polygons
+            for lane_name, lane_data in LANES.items():
+                sv.draw_polygon(
+                    annotated_frame,
+                    polygon=lane_data["polygon"],
+                    color=lane_data["color"],
+                    thickness=4
+                )
+
+            # Display lane counts on the frame
+            y_offset = 50
+            for lane, count in lane_counts.items():
+                text = f"{lane}: {count}"
+                cv2.putText(
+                    annotated_frame,
+                    text,
+                    (50, y_offset),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    1,
+                    (255, 255, 255),
+                    2
+                )
+                y_offset += 50
 
             # Write annotated frame to output video
             sink.write_frame(annotated_frame)

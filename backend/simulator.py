@@ -332,7 +332,7 @@ class TrafficSimulator:
             
 if __name__ == "__main__":
     # Example usage
-    simulator = TrafficSimulator("scenarios/scenario5.json", strategy="multi_agent", debug=True)
+    simulator = TrafficSimulator("scenarios/scenario1.json", strategy="multi_agent", debug=True)
     experiment_dir, metrics, _ = simulator.run()
     
     print(f"Simulation complete. Results saved to {experiment_dir}")
