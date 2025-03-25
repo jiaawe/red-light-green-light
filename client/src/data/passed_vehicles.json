@@ -1,0 +1,74 @@
+[
+  {
+    "vehicle_id": "V4004",
+    "vehicle_type": "sedan",
+    "lane_id": "Southbound_Left",
+    "destination": "Southbound_Left",
+    "timestamp": "2025-03-19T12:15:25",
+    "wait_time": 0,
+    "stops": 0
+  },
+  {
+    "vehicle_id": "V4005",
+    "vehicle_type": "car",
+    "lane_id": "Southbound_Straight",
+    "destination": "Southbound_Straight",
+    "timestamp": "2025-03-19T12:15:25",
+    "wait_time": 0,
+    "stops": 0
+  },
+  {
+    "vehicle_id": "V4006",
+    "vehicle_type": "car",
+    "lane_id": "Northbound_Straight",
+    "destination": "Northbound_Straight",
+    "timestamp": "2025-03-19T12:15:25",
+    "wait_time": 0,
+    "stops": 0
+  },
+  {
+    "vehicle_id": "V4001",
+    "vehicle_type": "car",
+    "lane_id": "Eastbound_Left",
+    "destination": "Eastbound_Straight",
+    "timestamp": "2025-03-19T12:16:00",
+    "wait_time": 45,
+    "stops": 1
+  },
+  {
+    "vehicle_id": "V4002",
+    "vehicle_type": "car",
+    "lane_id": "Eastbound_Straight",
+    "destination": "Eastbound_Straight",
+    "timestamp": "2025-03-19T12:16:00",
+    "wait_time": 45,
+    "stops": 1
+  },
+  {
+    "vehicle_id": "V4003",
+    "vehicle_type": "suv",
+    "lane_id": "Eastbound_Straight",
+    "destination": "Eastbound_Straight",
+    "timestamp": "2025-03-19T12:16:00",
+    "wait_time": 40,
+    "stops": 1
+  },
+  {
+    "vehicle_id": "V4007",
+    "vehicle_type": "ambulance",
+    "lane_id": "Westbound_Right",
+    "destination": "Westbound_Right",
+    "timestamp": "2025-03-19T12:17:20",
+    "wait_time": 110,
+    "stops": 1
+  },
+  {
+    "vehicle_id": "V4008",
+    "vehicle_type": "van",
+    "lane_id": "Westbound_Right",
+    "destination": "Westbound_Right",
+    "timestamp": "2025-03-19T12:17:20",
+    "wait_time": 110,
+    "stops": 1
+  }
+]
