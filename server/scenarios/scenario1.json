@@ -15,7 +15,7 @@
       "lane_id": "Southbound_Left",
       "speed_kmh": 5,
       "distance_to_intersection_m": 6.8,
-      "destination": "Southbound_Left",
+      "destination": "Eastbound_Left",
       "vehicle_type": "sedan",
       "estimated_arrival_time": "2025-03-19T08:00:06",
       "emergency_vehicle": false
@@ -55,7 +55,7 @@
       "lane_id": "Southbound_Left",
       "speed_kmh": 10,
       "distance_to_intersection_m": 145.8,
-      "destination": "Southbound_Straight",
+      "destination": "Eastbound_Left",
       "vehicle_type": "sedan",
       "estimated_arrival_time": "2025-03-19T08:01:55",
       "emergency_vehicle": false

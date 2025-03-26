@@ -139,7 +139,7 @@ const IntersectionView = ({ currentState, previousState }) => {
     // Handle normal positioning
     if (!vehicle.isAnimating) {
       switch (direction) {
-        case "Northbound":
+        case "Southbound":
           rotation = 270;
           y = CENTER_Y + ROAD_WIDTH / 2 + distancePixels;
 
@@ -152,7 +152,7 @@ const IntersectionView = ({ currentState, previousState }) => {
           }
           break;
 
-        case "Southbound":
+        case "Northbound":
           rotation = 90;
           y = CENTER_Y - ROAD_WIDTH / 2 - distancePixels;
 
@@ -206,7 +206,7 @@ const IntersectionView = ({ currentState, previousState }) => {
     let startRotation = 0;
 
     switch (startDirection) {
-      case "Northbound":
+      case "Southbound":
         startRotation = 270;
         startY = CENTER_Y + ROAD_WIDTH / 2;
         if (lane === "Left") {
@@ -217,7 +217,7 @@ const IntersectionView = ({ currentState, previousState }) => {
           startX = CENTER_X - LANE_WIDTH * 0.5;
         }
         break;
-      case "Southbound":
+      case "Northbound":
         startRotation = 90;
         startY = CENTER_Y - ROAD_WIDTH / 2;
         if (lane === "Left") {
@@ -259,12 +259,12 @@ const IntersectionView = ({ currentState, previousState }) => {
 
     // Calculate end position based on the destination
     switch (endDirection) {
-      case "Northbound":
+      case "Southbound":
         endRotation = 270;
         endY = CENTER_Y - ROAD_WIDTH / 2 - 50;
         endX = CENTER_X - LANE_WIDTH * 1.5; // Exit in the straight lane
         break;
-      case "Southbound":
+      case "Northbound":
         endRotation = 90;
         endY = CENTER_Y + ROAD_WIDTH / 2 + 50;
         endX = CENTER_X + LANE_WIDTH * 1.5; // Exit in the straight lane
@@ -311,7 +311,7 @@ const IntersectionView = ({ currentState, previousState }) => {
       const t = progress;
       // Different control points for right turns
       const cp1x =
-        startDirection === "Northbound" || startDirection === "Southbound"
+        startDirection === "Southbound" || startDirection === "Northbound"
           ? startX
           : CENTER_X;
       const cp1y =
@@ -319,7 +319,7 @@ const IntersectionView = ({ currentState, previousState }) => {
           ? startY
           : CENTER_Y;
       const cp2x =
-        endDirection === "Northbound" || endDirection === "Southbound"
+        endDirection === "Southbound" || endDirection === "Northbound"
           ? endX
           : CENTER_X;
       const cp2y =
@@ -390,12 +390,12 @@ const IntersectionView = ({ currentState, previousState }) => {
 
   const getTrafficLightPosition = (direction, type) => {
     const positions = {
-      Northbound: {
+      Southbound: {
         Left: { top: "305px", left: "195px" },
         Straight: { top: "305px", left: "215px" },
         Right: { top: "305px", left: "235px" },
       },
-      Southbound: {
+      Northbound: {
         Left: { top: "185px", left: "295px" },
         Straight: { top: "185px", left: "275px" },
         Right: { top: "185px", left: "255px" },
@@ -516,7 +516,7 @@ const IntersectionView = ({ currentState, previousState }) => {
             }}
           ></div>
 
-          {/* Lane dividers - Northbound (bottom half, 3 lanes) */}
+          {/* Lane dividers - Southbound (bottom half, 3 lanes) */}
           <div
             style={{
               position: "absolute",
@@ -568,7 +568,7 @@ const IntersectionView = ({ currentState, previousState }) => {
             }}
           ></div>
 
-          {/* Lane dividers - Southbound (top half, 3 lanes) */}
+          {/* Lane dividers - Northbound (top half, 3 lanes) */}
           <div
             style={{
               position: "absolute",
@@ -841,7 +841,7 @@ const IntersectionView = ({ currentState, previousState }) => {
               color: "#4b5563",
             }}
           >
-            Southbound
+            Northbound
           </div>
           <div
             style={{
@@ -853,7 +853,7 @@ const IntersectionView = ({ currentState, previousState }) => {
               color: "#4b5563",
             }}
           >
-            Northbound
+            Southbound
           </div>
 
           {/* Crosswalks */}
@@ -972,7 +972,7 @@ const IntersectionView = ({ currentState, previousState }) => {
           </div>
 
           {/* Traffic Lights */}
-          {["Northbound", "Southbound", "Eastbound", "Westbound"].map(
+          {["Southbound", "Northbound", "Eastbound", "Westbound"].map(
             (direction) =>
               ["Left", "Straight", "Right"].map((type) => (
                 <TrafficLight
@@ -998,7 +998,7 @@ const IntersectionView = ({ currentState, previousState }) => {
           })}
 
           {/* Direction arrows in lanes */}
-          {/* Northbound */}
+          {/* Southbound */}
           <div
             style={{
               position: "absolute",
@@ -1033,7 +1033,7 @@ const IntersectionView = ({ currentState, previousState }) => {
             ↑
           </div>
 
-          {/* Southbound */}
+          {/* Northbound */}
           <div
             style={{
               position: "absolute",
