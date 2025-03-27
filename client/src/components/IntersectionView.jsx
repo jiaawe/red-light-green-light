@@ -1118,6 +1118,25 @@ const IntersectionView = ({ currentState, previousState }) => {
           <div
             style={{
               position: "absolute",
+              top: "225px",
+              left: "550px",
+              fontSize: "40px",
+              color: "white",
+            }}
+          >
+            🚗💥🚙
+            <span
+              style={{
+                fontSize: "12px",
+                color: "white",
+              }}
+            >
+              accident reported
+            </span>
+          </div>
+          <div
+            style={{
+              position: "absolute",
               top: "270px",
               left: "350px",
               fontSize: "16px",
