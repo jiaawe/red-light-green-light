@@ -18,9 +18,9 @@ const SignalStatus = ({ currentState }) => {
   if (!signal_status) return null;
 
   const directions = [
-    "Southbond",
+    "Southbound",
     "Eastbound",
-    "Northbond",
+    "Northbound",
     "Westbound",
     "Crosswalk",
   ];
@@ -40,11 +40,11 @@ const SignalStatus = ({ currentState }) => {
 
   const getDirectionIcon = (direction) => {
     switch (direction) {
-      case "Southbond":
+      case "Southbound":
         return <ArrowUp className="h-4 w-4" />;
       case "Eastbound":
         return <ArrowRight className="h-4 w-4" />;
-      case "Northbond":
+      case "Northbound":
         return <ArrowDown className="h-4 w-4" />;
       case "Westbound":
         return <ArrowLeft className="h-4 w-4" />;

@@ -154,7 +154,7 @@ const SimulationMetrics = ({ metrics }) => {
           </div>
 
           {/* Energy efficiency */}
-          <div className="bg-blue-50 p-3 rounded-md flex items-center justify-between">
+          {/* <div className="bg-blue-50 p-3 rounded-md flex items-center justify-between">
             <div className="flex items-center">
               <Battery className="h-5 w-5 text-blue-600 mr-2" />
               <div className="text-sm font-medium text-blue-700">
@@ -164,7 +164,7 @@ const SimulationMetrics = ({ metrics }) => {
             <div className="text-lg font-bold text-blue-800">
               {(metrics.energy_efficiency * 100).toFixed(1)}%
             </div>
-          </div>
+          </div> */}
         </div>
       </CardContent>
     </Card>
