@@ -8,6 +8,7 @@ simulator_bp = Blueprint('simulator', __name__, url_prefix='/api')
 # Directory for storing scenarios
 SCENARIOS_DIR = "scenarios"
 
+
 @simulator_bp.route('/scenarios', methods=['POST'])
 def add_scenario():
     """
@@ -18,35 +19,35 @@ def add_scenario():
         return jsonify({"error": "Request must be JSON"}), 400
 
     data = request.json
-    
+
     # Validate input
     if 'name' not in data:
         return jsonify({"error": "Scenario name is required"}), 400
     if 'data' not in data:
         return jsonify({"error": "Scenario data is required"}), 400
-    
+
     # Ensure name has proper format
     scenario_name = data['name']
     if not scenario_name.endswith('.json'):
         scenario_name += '.json'
-    
+
     # Ensure scenarios directory exists
     os.makedirs(SCENARIOS_DIR, exist_ok=True)
-    
+
     # Save scenario file
     scenario_path = os.path.join(SCENARIOS_DIR, scenario_name)
-    
+
     try:
         # Validate that the data is proper JSON
         scenario_data = data['data']
         if isinstance(scenario_data, str):
             # If data is provided as a string, parse it
             scenario_data = json.loads(scenario_data)
-        
+
         # Write scenario to file
         with open(scenario_path, 'w') as file:
             json.dump(scenario_data, file, indent=2)
-        
+
         return jsonify({
             "success": True,
             "message": f"Scenario {scenario_name} saved successfully",
@@ -56,6 +57,7 @@ def add_scenario():
         return jsonify({"error": "Invalid JSON data provided"}), 400
     except Exception as e:
         return jsonify({"error": f"Failed to save scenario: {str(e)}"}), 500
+
 
 @simulator_bp.route('/run', methods=['POST'])
 def run_simulation():
@@ -67,43 +69,49 @@ def run_simulation():
         return jsonify({"error": "Request must be JSON"}), 400
 
     data = request.json
-    
+
     # Validate input
     if 'scenario' not in data:
         return jsonify({"error": "Scenario name is required"}), 400
-    
+
     # Get scenario name and ensure .json extension
     scenario_name = data['scenario']
     if not scenario_name.endswith('.json'):
         scenario_name += '.json'
-    
+
     # Get strategy, default to set_interval
     strategy = data.get('strategy', 'set_interval')
     if strategy not in ['set_interval', 'multi_agent']:
         return jsonify({"error": "Invalid strategy. Choose 'set_interval' or 'multi_agent'"}), 400
-    
+
     # Construct full scenario path
     scenario_path = os.path.join(SCENARIOS_DIR, scenario_name)
     if not os.path.exists(scenario_path):
         return jsonify({"error": f"Scenario {scenario_name} not found"}), 404
-    
+
     # Get optional parameters
     debug = data.get('debug', False)
     max_steps = data.get('max_steps', 10000)
-    
+
     try:
+        # Load the scenario data
+        with open(scenario_path, 'r') as file:
+            scenario_data = json.load(file)
+
         # Run simulation
-        simulator = TrafficSimulator(scenario_path, strategy=strategy, debug=debug)
+        simulator = TrafficSimulator(
+            scenario_path, strategy=strategy, debug=debug)
         experiment_dir, metrics, states = simulator.run(max_steps=max_steps)
-        
+
         # Extract experiment ID from the full path
         experiment_id = os.path.basename(experiment_dir)
-        
-        # Return results
+
+        # Return results including the scenario data
         return jsonify({
             "success": True,
             "experiment_id": experiment_id,
             "experiment_dir": experiment_dir,
+            "scenario": scenario_data,  # Include the scenario data
             "states": states,
             "metrics": metrics
         })
