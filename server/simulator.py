@@ -109,9 +109,10 @@ class TrafficSimulator:
             can_proceed = False
 
             if new_distance <= 0:
-                # # Check if estimated arrival time has been reached
+                # Check if estimated arrival time has been reached
                 # if "estimated_arrival_time" in vehicle:
-                #     estimated_arrival = datetime.fromisoformat(vehicle["estimated_arrival_time"])
+                #     estimated_arrival = datetime.fromisoformat(
+                #         vehicle["estimated_arrival_time"])
                 #     if self.timestamp < estimated_arrival:
                 #         # Vehicle hasn't reached its estimated arrival time yet
                 #         vehicle["distance_to_intersection_m"] = new_distance
@@ -353,7 +354,7 @@ class TrafficSimulator:
 if __name__ == "__main__":
     # Example usage
     simulator = TrafficSimulator(
-        "scenarios/scenario1.json", strategy="multi_agent", debug=True)
+        "scenarios/scenario5.json", strategy="multi_agent", debug=True)
     experiment_dir, metrics, _ = simulator.run()
 
     print(f"Simulation complete. Results saved to {experiment_dir}")
