@@ -68,13 +68,13 @@ class TrafficOptimizer:
         
         # Make the API call to GPT-4o-mini
         response = self.client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are an intelligent traffic management system optimizer."},
                 {"role": "user", "content": formatted_prompt}
             ],
             temperature=0.2,  # Lower temperature for more deterministic results
-            max_tokens=1024,
+            max_tokens=2048,
             response_format={"type": "json_object"}
         )
         
