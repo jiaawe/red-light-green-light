@@ -5,6 +5,8 @@ import supervision as sv
 from collections import defaultdict, deque
 from ultralytics import YOLO
 from view_transformer import ViewTransformer
+from kafka import KafkaProducer
+import json
 
 YOLO_PATH = "yolov8x.pt"
 DEVICE = "mps" # Change to cuda if needed
@@ -154,6 +156,12 @@ if __name__ == "__main__":
     # Store vehicle counts for each lane
     lane_counts = {lane_name: 0 for lane_name in LANES}
 
+    # Initialize Kafka producer
+    producer = KafkaProducer(
+        bootstrap_servers='localhost:9092',
+        value_serializer=lambda v: json.dumps(v).encode('utf-8')
+    )
+
     with sv.VideoSink(args.target_video_path, video_info) as sink:
         # Iterate through frames
         for frame_index, frame in enumerate(frame_generator):
@@ -220,13 +228,6 @@ if __name__ == "__main__":
                 scene=annotated_frame, detections=detections, labels=labels
             )
 
-            # Draw the polygon zone on the frame
-            # sv.draw_polygon(
-            #     annotated_frame,
-            #     polygon=SOURCE,
-            #     color=sv.Color.RED
-            # )
-
             # Draw lane polygons
             for lane_name, lane_data in LANES.items():
                 sv.draw_polygon(
@@ -250,6 +251,15 @@ if __name__ == "__main__":
                     2
                 )
                 y_offset += 50
+
+            # Send data to Kafka
+            producer.send(
+                'video-analytics',
+                {
+                    'frame_index': frame_index,
+                    'lane_counts': lane_counts
+                }
+            )
 
             # Write annotated frame to output video
             sink.write_frame(annotated_frame)

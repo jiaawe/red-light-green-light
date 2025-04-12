@@ -7,3 +7,7 @@ backend/vehicle_estimator/yolov8x.pt
 backend/vehicle_estimator/yolo11x.pt
 backend/vehicle_estimator/video.mp4
 backend/vehicle_estimator/output.mp4
+
+server/vehicle_estimator/detection/yolov8x.pt
+server/vehicle_estimator/detection/output.mp4
+server/vehicle_estimator/detection/video.mp4
